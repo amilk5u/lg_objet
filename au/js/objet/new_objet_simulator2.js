@@ -256,7 +256,7 @@
 				simulator.updateObjetSelected();
 				//console.log('$("#refrigerator_convertible_L").val()',$("#refrigerator_convertible_L").val());
 				//console.log('$("#refrigerator_convertible_M").val()',$("#refrigerator_convertible_M").val());
-				if($("#refrigerator_convertible_L").val() != "" || $("#refrigerator_convertible_M").val() != "" ||  ($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != "") /*|| ($("#wash_T").val() != "" && $("#wash_B").val() != "") || $("#clean").val() != "" *//*|| $("#styler").val() != "" */){
+				if($("#refrigerator_convertible_L").val() != "" || $("#refrigerator_convertible_M").val() != "" ||  ($("#refrigerator_LT").val() != "" || $("#refrigerator_LB").val() != "" || $("#refrigerator_RB").val() != "") /*|| ($("#wash_T").val() != "" && $("#wash_B").val() != "") || $("#clean").val() != "" *//*|| $("#styler").val() != "" */){
 					let popCont = '';
 					let imgUrl = 'images/objet/simulator/appliances/';					
 					if($("#refrigerator_convertible_L").val() != ""){//larder
@@ -356,7 +356,7 @@
 						popCont += '</li>';
 					}
 
-					if($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != ""){//상냉장고
+					if($("#refrigerator_LT").val() != "" || $("#refrigerator_LB").val() != "" || $("#refrigerator_RB").val() != ""){//상냉장고
 						let nm = "rf";
 						let nmTxt = "Next6";
 						let colorNmLT = $("#refrigerator_LT").val();
@@ -375,6 +375,8 @@
 						popCont += '	</div>';
 						popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail au_go_detail_btn3" data-link-name="move to Next6 Learn more"><span>InstaView®<br>French Door Fridge</span></a>';
 						popCont += '</li>';
+					} else {
+						console.log("안녕하세요")
 					}
 
 					/*if($("#wash_T").val() != "" && $("#wash_B").val() != ""){//워시타워
@@ -446,17 +448,11 @@
 						popCont += '</li>';
 					}*/
 
-
 					$("#purchase_popup .purchase_list ul").html("").append(popCont);	
 					$("#purchase_popup").fadeIn();
-					
-					
-					
 				}else{
 					$("#empty_popup").fadeIn();
 				}
-				
-				
 				
 				/*document.getElementById('loading').style.display = '';
 
