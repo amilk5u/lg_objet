@@ -648,3 +648,7 @@
 #bdshare_weixin_qrcode_dialog_bg{z-index:-1 !important;}
 .simulator_nav > ul{display:flex;align-items: flex-end;align-content: stretch;justify-content: center;flex-wrap: nowrap;flex-direction: row;}
 .simulator_nav > ul > li{flex:1;}
+
+/* 220510 start */
+.mainColorSet {font-size:15px; position:relative; margin:20px 0 0;}
+/* 220510 end */
