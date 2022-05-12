@@ -9,6 +9,7 @@ var go_shop_model = "";
 
 // 장바구니 CTA 데이터 변수
 var userSelectedModelData = [];
+var colorDefault = [];
 
 (function (objSimulator) {
    'use strict';
@@ -102,13 +103,13 @@ var userSelectedModelData = [];
                      { colorCode: 'fn_botanic', filename: 'appliances/rf/rf_door01_01fn_botanic.png' },
                      { colorCode: 'fn_sand', filename: 'appliances/rf/rf_door01_01fn_sand.png' },
                      { colorCode: 'fn_stone', filename: 'appliances/rf/rf_door01_01fn_stone.png' },
-                     { colorCode: 'st_black', filename: 'appliances/rf/rf_door01_02st_black.png', modelId: 'MD07553647' },
-                     { colorCode: 'st_silver', filename: 'appliances/rf/rf_door01_02st_silver.png', modelId: 'MD07553651' },
-                     { colorCode: 'st_green', filename: 'appliances/rf/rf_door01_02st_green.png', modelId: 'MD07553644' },
-                     { colorCode: 'mg_beige', filename: 'appliances/rf/rf_door01_03mg_beige.png', modelId: 'MD07553575' },
-                     { colorCode: 'mg_pink', filename: 'appliances/rf/rf_door01_03mg_pink.png', modelId: 'MD07553583' },
-                     { colorCode: 'mg_mint', filename: 'appliances/rf/rf_door01_03mg_mint.png', modelId: 'MD07553578' },
-                     { colorCode: 'mg_silver', filename: 'appliances/rf/rf_door01_03mg_silver.png', modelId: 'MD07553586' },
+                     { colorCode: 'st_black', filename: 'appliances/rf/rf_door01_02st_black.png', modelId: '왼쪽위_블랙' }, //MD07553647
+                     { colorCode: 'st_silver', filename: 'appliances/rf/rf_door01_02st_silver.png', modelId: '왼쪽위_실버' }, //MD07553651
+                     { colorCode: 'st_green', filename: 'appliances/rf/rf_door01_02st_green.png', modelId: '왼쪽위_그린' },  //MD07553644
+                     { colorCode: 'mg_beige', filename: 'appliances/rf/rf_door01_03mg_beige.png', modelId: '왼쪽위_베이지' }, //MD07553575
+                     { colorCode: 'mg_pink', filename: 'appliances/rf/rf_door01_03mg_pink.png', modelId: '왼쪽위_핑크' }, //MD07553583
+                     { colorCode: 'mg_mint', filename: 'appliances/rf/rf_door01_03mg_mint.png', modelId: '왼쪽위_민트' }, //MD07553578
+                     { colorCode: 'mg_silver', filename: 'appliances/rf/rf_door01_03mg_silver.png', modelId: '왼쪽위_라이트실버' }, //MD07553586
                      { colorCode: 'nm_gray', filename: 'appliances/rf/rf_door01_04nm_gray.png' },
                      { colorCode: 'nm_black', filename: 'appliances/rf/rf_door01_04nm_black.png' },
                      { colorCode: 'nm_white', filename: 'appliances/rf/rf_door01_04nm_white.png' },
@@ -126,13 +127,13 @@ var userSelectedModelData = [];
                      { colorCode: 'fn_botanic', filename: 'appliances/rf/rf_door02_01fn_botanic.png' },
                      { colorCode: 'fn_sand', filename: 'appliances/rf/rf_door02_01fn_sand.png' },
                      { colorCode: 'fn_stone', filename: 'appliances/rf/rf_door02_01fn_stone.png' },
-                     { colorCode: 'st_black', filename: 'appliances/rf/rf_door02_02st_black.png', modelId: 'MD07553646' },
-                     { colorCode: 'st_silver', filename: 'appliances/rf/rf_door02_02st_silver.png', modelId: 'MD07553649' },
-                     { colorCode: 'st_green', filename: 'appliances/rf/rf_door02_02st_green.png', modelId: 'MD07553635' },
-                     { colorCode: 'mg_beige', filename: 'appliances/rf/rf_door02_03mg_beige.png', modelId: 'MD07553574' },
-                     { colorCode: 'mg_pink', filename: 'appliances/rf/rf_door02_03mg_pink.png', modelId: 'MD07553580' },
-                     { colorCode: 'mg_mint', filename: 'appliances/rf/rf_door02_03mg_mint.png', modelId: 'MD07553577' },
-                     { colorCode: 'mg_silver', filename: 'appliances/rf/rf_door02_03mg_silver.png', modelId: 'MD07553584' },
+                     { colorCode: 'st_black', filename: 'appliances/rf/rf_door02_02st_black.png', modelId: '왼쪽아래_블랙' },  //MD07553646
+                     { colorCode: 'st_silver', filename: 'appliances/rf/rf_door02_02st_silver.png', modelId: '왼쪽아래_실버' }, //MD07553649
+                     { colorCode: 'st_green', filename: 'appliances/rf/rf_door02_02st_green.png', modelId: '왼쪽아래_그린' }, //MD07553635
+                     { colorCode: 'mg_beige', filename: 'appliances/rf/rf_door02_03mg_beige.png', modelId: '왼쪽아래_베이지' }, //MD07553574
+                     { colorCode: 'mg_pink', filename: 'appliances/rf/rf_door02_03mg_pink.png', modelId: '왼쪽아래_핑크' }, //MD07553580
+                     { colorCode: 'mg_mint', filename: 'appliances/rf/rf_door02_03mg_mint.png', modelId: '왼쪽아래_민트' }, //MD07553577
+                     { colorCode: 'mg_silver', filename: 'appliances/rf/rf_door02_03mg_silver.png', modelId: '왼쪽아래_라이트실버' }, //MD07553584
                      { colorCode: 'nm_gray', filename: 'appliances/rf/rf_door02_04nm_gray.png' },
                      { colorCode: 'nm_black', filename: 'appliances/rf/rf_door02_04nm_black.png' },
                      { colorCode: 'nm_white', filename: 'appliances/rf/rf_door02_04nm_white.png' },
@@ -150,13 +151,13 @@ var userSelectedModelData = [];
                      { colorCode: 'fn_botanic', filename: 'appliances/rf/rf_door03_01fn_botanic.png' },
                      { colorCode: 'fn_sand', filename: 'appliances/rf/rf_door03_01fn_sand.png' },
                      { colorCode: 'fn_stone', filename: 'appliances/rf/rf_door03_01fn_stone.png' },
-                     { colorCode: 'st_black', filename: 'appliances/rf/rf_door03_02st_black.png', modelId: 'MD07553646' },
-                     { colorCode: 'st_silver', filename: 'appliances/rf/rf_door03_02st_silver.png', modelId: 'MD07553649' },
-                     { colorCode: 'st_green', filename: 'appliances/rf/rf_door03_02st_green.png', modelId: 'MD07553635' },
-                     { colorCode: 'mg_beige', filename: 'appliances/rf/rf_door03_03mg_beige.png', modelId: 'MD07553574' },
-                     { colorCode: 'mg_pink', filename: 'appliances/rf/rf_door03_03mg_pink.png', modelId: 'MD07553580' },
-                     { colorCode: 'mg_mint', filename: 'appliances/rf/rf_door03_03mg_mint.png', modelId: 'MD07553577' },
-                     { colorCode: 'mg_silver', filename: 'appliances/rf/rf_door03_03mg_silver.png', modelId: 'MD07553584' },
+                     { colorCode: 'st_black', filename: 'appliances/rf/rf_door03_02st_black.png', modelId: '오른쪽아래_블랙' }, //MD07553646
+                     { colorCode: 'st_silver', filename: 'appliances/rf/rf_door03_02st_silver.png', modelId: '오른쪽아래_실버' }, //MD07553649
+                     { colorCode: 'st_green', filename: 'appliances/rf/rf_door03_02st_green.png', modelId: '오른쪽아래_그린' }, //MD07553635
+                     { colorCode: 'mg_beige', filename: 'appliances/rf/rf_door03_03mg_beige.png', modelId: '오른쪽아래_베이지' }, //MD07553574
+                     { colorCode: 'mg_pink', filename: 'appliances/rf/rf_door03_03mg_pink.png', modelId: '오른쪽아래_핑크' }, //MD07553580
+                     { colorCode: 'mg_mint', filename: 'appliances/rf/rf_door03_03mg_mint.png', modelId: '오른쪽아래_민트' }, //MD07553577
+                     { colorCode: 'mg_silver', filename: 'appliances/rf/rf_door03_03mg_silver.png', modelId: '오른쪽아래_라이트실버' }, //MD07553584
                      { colorCode: 'nm_gray', filename: 'appliances/rf/rf_door03_04nm_gray.png' },
                      { colorCode: 'nm_black', filename: 'appliances/rf/rf_door03_04nm_black.png' },
                      { colorCode: 'nm_white', filename: 'appliances/rf/rf_door03_04nm_white.png' },
@@ -1360,8 +1361,6 @@ var userSelectedModelData = [];
       }
    ];
 
-   let bin = false;
-
    //배열 내 오브젝트 index 참조용 함수
    function findIndexByKeyValue(_array, key, value) {
       if (_array.length == 'undefined')
@@ -1799,10 +1798,14 @@ var userSelectedModelData = [];
          existIndex = findIndexByKeyValue(userSelected.selectedObjet, 'selectedObject_id', configData.object[index].id);
          // console.log('existIndex :  ' + existIndex)
 
-
+         
 
          //사용자 선택 값 구조
          if (existIndex == -1) { //선택 영역 동일 오브제 id없을 때만 생성
+            console.log('어디임?')
+
+
+            
             var tmpObject = {
                selectedObject_id: configData.object[index].id,
                selectedObject_name: configData.object[index].name,
@@ -1821,6 +1824,12 @@ var userSelectedModelData = [];
                }]
             };
 
+            colorDefault.push(tmpObject.selectedObject_desc[0].selectedObjectSelectedModelId);
+
+            
+            
+            console.log(colorDefault)
+
             //처음 부터 컬러세트 설정일 경우
             if (isFavSet) {
                tmpObject.selectedObject_complete = true;
@@ -1828,23 +1837,19 @@ var userSelectedModelData = [];
             }
             userSelected.selectedObjet.push(tmpObject);
 
+
             /* 220511 start */
             // console.log("111");
-            if ( userSelectedModelData.length < 2 ) {
+            /* if ( userSelectedModelData.length < 2 ) {
                userSelectedModelData.push(tmpObject);
-
-
-            }
-
-
-            // 본품 클릭시에 안에 있는 내용이 뭔가 바뀌었을 때 ! 
-            // 그것으로 바뀌어라 
-            console.log(tmpObject)
-            console.log(userSelectedModelData);
-
-            console.log()
-
-            
+            } */
+            userSelectedModelData.push(tmpObject);
+            /* 
+               1. 클릭시 선택되는 것이 1번째 냉장고인지 판단!
+               2. 현재 가지고 있는 값에서 변경이 일어났을때 판단을 해서 값을 변경한다.
+               3. 
+            */
+            // console.log(userSelectedModelData);
 
 
             /* 220511 end */
@@ -2408,8 +2413,6 @@ var userSelectedModelData = [];
             let selectColor;
             if (btnID === 'refrigeratorSetBtn') {
                _self.resetSelectedObject('refrigerator'); // 제품소재 선택 초기화
-               console.log('냉장고 클릭');
-
                $("#refrigerator_LT").val("st_green");
                $("#refrigerator_LB").val("st_silver");
                $("#refrigerator_RB").val("st_silver");
