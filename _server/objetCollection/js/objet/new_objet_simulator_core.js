@@ -10,6 +10,8 @@ var go_shop_model = "";
 // 장바구니 CTA 데이터 변수
 var userSelectedModelData = [];
 var colorDefault = [];
+var bol1 = true;
+var bol2 = true;
 
 (function (objSimulator) {
    'use strict';
@@ -1785,7 +1787,6 @@ var colorDefault = [];
          targetImage = document.querySelector('#' + targetId);
          var selectionIndex = findIndexByKeyValue(configData.object[index].selections, 'id', targetId);
          var surfaceIndex = findIndexByKeyValue(configData.object[index].selections[selectionIndex].Surface, 'colorCode', colorCode);
-
          // console.log('targetImage : ' + targetImage)
          // console.log('selectionIndex : ' + selectionIndex)
          // console.log('surfaceIndex : ' + surfaceIndex)
@@ -1798,14 +1799,32 @@ var colorDefault = [];
          existIndex = findIndexByKeyValue(userSelected.selectedObjet, 'selectedObject_id', configData.object[index].id);
          // console.log('existIndex :  ' + existIndex)
 
-         
-
          //사용자 선택 값 구조
          if (existIndex == -1) { //선택 영역 동일 오브제 id없을 때만 생성
-            console.log('어디임?')
 
 
-            
+
+            if (bol1 && tmpObject.selectedObject_id === 'refrigerator') {
+               console.log('1번째 냉장고')
+               bol1 = false;
+               userSelectedModelData.push(tmpObject);
+               console.log(userSelectedModelData)
+            } else if (bol2 && tmpObject.selectedObject_id === 'refrigerator_convertible') {
+               console.log('2번째 냉장고')
+               bol2 = false;
+               userSelectedModelData.push(tmpObject);
+               console.log(userSelectedModelData)
+            } else {
+               console.log('본품클릭')
+               for (let i = 0; i < userSelectedModelData.length; i++) {
+                  if (userSelectedModelData[i].selectedObject_id === 'refrigerator') {
+                     for (let j = 0; tmpObject.selectedObject_desc.length; j++) {
+                        // userSelectedModelData[i].selectedObject_desc[j].selectedObjectSelectedSurface = '으하하하하하무슨색/'
+                     }
+                  }
+               }
+            }
+
             var tmpObject = {
                selectedObject_id: configData.object[index].id,
                selectedObject_name: configData.object[index].name,
@@ -1824,12 +1843,6 @@ var colorDefault = [];
                }]
             };
 
-            colorDefault.push(tmpObject.selectedObject_desc[0].selectedObjectSelectedModelId);
-
-            
-            
-            console.log(colorDefault)
-
             //처음 부터 컬러세트 설정일 경우
             if (isFavSet) {
                tmpObject.selectedObject_complete = true;
@@ -1838,21 +1851,10 @@ var colorDefault = [];
             userSelected.selectedObjet.push(tmpObject);
 
 
-            /* 220511 start */
-            // console.log("111");
-            /* if ( userSelectedModelData.length < 2 ) {
-               userSelectedModelData.push(tmpObject);
-            } */
-            userSelectedModelData.push(tmpObject);
-            /* 
-               1. 클릭시 선택되는 것이 1번째 냉장고인지 판단!
-               2. 현재 가지고 있는 값에서 변경이 일어났을때 판단을 해서 값을 변경한다.
-               3. 
-            */
-            // console.log(userSelectedModelData);
 
 
-            /* 220511 end */
+
+
          } else {
             var existSelectionIndex = 0;
             existSelectionIndex = findIndexByKeyValue(userSelected.selectedObjet[existIndex].selectedObject_desc, 'selectedObjectSelection_id', targetId);
