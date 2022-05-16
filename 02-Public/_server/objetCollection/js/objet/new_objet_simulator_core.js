@@ -1844,10 +1844,8 @@ var bol1 = true, bol2 = true;
                   }
                }
             }
-
             console.log(userSelectedModelData)
 
-            
 
          } else {
             var existSelectionIndex = 0;

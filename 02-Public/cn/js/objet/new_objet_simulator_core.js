@@ -6,12 +6,13 @@
  */
 var jsa_bgindex = 0;
 var go_shop_model = "";
+var bol1 = true, bol2 = true, bol3 = true, bol4 = true, bol5 = true;
 
 
 // 장바구니 CTA 데이터 변수
 var userSelectedModelData = [];
 var colorDefault = [];
-var bol1 = true, bol2 = true;
+
 
 (function (objSimulator) {
 	'use strict';
@@ -78,6 +79,7 @@ var bol1 = true, bol2 = true;
 		object: [
 			{
 				id: 'refrigerator',
+				bol: true,
 				name: 'InstaViewTM 多门冰箱',
 				icon: { default: 'Thumb_01.png', focus: 'Thumb_01_selected.png' },
 				offset: { top: 328, left: 295, },
@@ -316,6 +318,7 @@ var bol1 = true, bol2 = true;
 			},*/
 			{
 				id: 'refrigerator_convertible',
+				bol: true,
 				name: '自由组合冰箱',
 				icon: { default: 'Thumb_02_01.png', focus: 'Thumb_02_01_selected.png' },
 				offset: { top: 327, left: 1009, },
@@ -541,6 +544,7 @@ var bol1 = true, bol2 = true;
 			},*/
 			{
 				id: 'wash',
+				bol: true,
 				name: 'WashTowerTM 洗丨干一体机',
 				icon: { default: 'Thumb_07.png', focus: 'Thumb_07_selected.png' },
 				offset: { top: 336, left: 2951/*4871*/, },
@@ -558,6 +562,9 @@ var bol1 = true, bol2 = true;
 						size: { width: 177, height: 207, },
 						placeholder: 'appliances/wash/wt_top_nomal.png',
 						defaultImage: 'appliances/wash/wt_top_nomal.png',
+						productInfo: {
+							modelId: 'MD07553654',
+						},
 						Surface: [
 							{ colorCode: 'nm_green', filename: 'appliances/wash/wt_door01_04nm_green.png' },
 							{ colorCode: 'nm_beige', filename: 'appliances/wash/wt_door01_04nm_beige.png' },
@@ -570,6 +577,9 @@ var bol1 = true, bol2 = true;
 						size: { width: 177, height: 244, },
 						placeholder: 'appliances/wash/wt_bottom_nomal.png',
 						defaultImage: 'appliances/wash/wt_bottom_nomal.png',
+						productInfo: {
+							modelId: 'MD07553654',
+						},
 						Surface: [
 							{ colorCode: 'nm_green', filename: 'appliances/wash/wt_door02_04nm_green.png' },
 							{ colorCode: 'nm_beige', filename: 'appliances/wash/wt_door02_04nm_beige.png' },
@@ -590,6 +600,7 @@ var bol1 = true, bol2 = true;
 			},
 			{
 				id: 'clean',
+				bol: true,
 				name: 'All-in-one TowerTM 无线手持吸尘器 铁灰色',
 				icon: { default: 'Thumb_09.png', focus: 'Thumb_09_selected.png' },
 				offset: { top: 537, left: 4197/*6117*/, },
@@ -607,6 +618,9 @@ var bol1 = true, bol2 = true;
 						size: { width: 81, height: 328, },
 						placeholder: 'appliances/clean/ct_nomal.png',
 						defaultImage: 'appliances/clean/ct_nomal.png',
+						productInfo: {
+							modelId: 'MD07553654',
+						},
 						Surface: [
 							{ colorCode: 'calm_green', filename: 'appliances/clean/clean_05ca_green.png' },
 							{ colorCode: 'calm_beige', filename: 'appliances/clean/clean_05ca_beige.png' },
@@ -625,6 +639,7 @@ var bol1 = true, bol2 = true;
 			},
 			{
 				id: 'styler',
+				bol: true,
 				name: 'StylerTM 蒸汽衣物护理机',
 				icon: { default: 'Thumb_08.png', focus: 'Thumb_08_selected.png' },
 				offset: { top: 266, left: 4402/*6322*/, },
@@ -642,6 +657,9 @@ var bol1 = true, bol2 = true;
 						size: { width: 183, height: 597, },
 						placeholder: 'appliances/styler/st_nomal.png',
 						defaultImage: 'appliances/styler/st_nomal.png',
+						productInfo: {
+							modelId: 'MD07553654',
+						},
 						Surface: [
 							{ colorCode: 'mg_green', filename: 'appliances/styler/styler_03mg_green.png' },
 							{ colorCode: 'mg_beige', filename: 'appliances/styler/styler_03mg_beige.png' },
@@ -1736,69 +1754,81 @@ var bol1 = true, bol2 = true;
 
 			//사용자 선택 값 구조
 			if (existIndex == -1) { //선택 영역 동일 오브제 id없을 때만 생성
-				/* 	var tmpObject = {
-						selectedObject_id: configData.object[index].id,
-						selectedObject_name: configData.object[index].name,
-						selectedObject_complete: false,
-						selectedObject_different_color_group: false, //기본값 : false, 서로 다른 소재를 선택한 상태 : true
-						selectedObject_set_name: '',
-						//장바구니 CTA
-						selectedObject_modelIds: [{
-							selectedObject_modelId: configData.object[index].selections[selectionIndex].productInfo.modelId
-						}],
-						selectedObject_desc: [{
-							selectedObjectSelection_id: configData.object[index].selections[selectionIndex].id,
-							selectedObjectSelectedSurface: configData.object[index].selections[selectionIndex].Surface[surfaceIndex].colorCode,
-							//장바구니 CTA
-							selectedObjectSelectedModelId: configData.object[index].selections[selectionIndex].Surface[surfaceIndex].modelId
-						}]
-					}; */
+				console.log('111');
 				var tmpObject = {
 					selectedObject_id: configData.object[index].id,
 					selectedObject_name: configData.object[index].name,
 					selectedObject_complete: false,
 					selectedObject_different_color_group: false, //기본값 : false, 서로 다른 소재를 선택한 상태 : true
 					selectedObject_set_name: '',
+					//장바구니 CTA
+					selectedObject_modelIds: [{
+						selectedObject_modelId: configData.object[index].selections[selectionIndex].productInfo.modelId
+					}],
 					selectedObject_desc: [{
 						selectedObjectSelection_id: configData.object[index].selections[selectionIndex].id,
-						selectedObjectSelectedSurface: configData.object[index].selections[selectionIndex].Surface[surfaceIndex].colorCode
+						selectedObjectSelectedSurface: configData.object[index].selections[selectionIndex].Surface[surfaceIndex].colorCode,
+						//장바구니 CTA
+						selectedObjectSelectedModelId: configData.object[index].selections[selectionIndex].Surface[surfaceIndex].modelId
 					}]
 				};
-
+				
 
 				//처음 부터 컬러세트 설정일 경우
 				if (isFavSet) {
 					tmpObject.selectedObject_complete = true;
 					tmpObject.selectedObject_set_name = colorSetName;
 				}
-
 				userSelected.selectedObjet.push(tmpObject);
-				userSelectedModelData.push(tmpObject);
+				// userSelectedModelData.push(tmpObject);
 
-				console.log(index)
-				/*   // 처음에 돌때만  push 하고, 2. 다음 클릭시 부터는 변경
-				  if (bol1 && tmpObject.selectedObject_id === 'refrigerator') {
-						console.log('1번째 냉장고');
-						bol1 = false;
+
+				// 처음에 돌때만  push 하고, 2. 다음 클릭시 부터는 변경
+				/* for (let i = 0; i < configData.object.length; i++) {
+					if (configData.object[index].bol === true && tmpObject.selectedObject_id === configData.object[i].id) {
+						console.log(configData.object[i].id);
+						configData.object[index].bol = false;
 						userSelectedModelData.push(tmpObject);
-				  } else if (bol2 && tmpObject.selectedObject_id === 'refrigerator_convertible') {
-						console.log('2번째 냉장고');
-						bol2 = false;
-						userSelectedModelData.push(tmpObject);
-				  } else {
-						console.log('본품클릭');
-						for (let i = 0; i < userSelectedModelData.length; i++) {
-							 if (userSelectedModelData[i].selectedObject_id === 'refrigerator') {
-								  console.log(userSelectedModelData[i] = tmpObject);
-							 }
+					} else {
+						console.log('데이터 변경')
+						for (let j = 0; j < userSelectedModelData.length; j++) {
+							if (userSelectedModelData[j].selectedObject_id === 'refrigerator') {
+								userSelectedModelData[j] = tmpObject;
+							}
 						}
-				  } */
+					}
+				} */
 
 
-
-
+				if (configData.object[index].bol && tmpObject.selectedObject_id === 'refrigerator') {
+					console.log('refrigerator');
+					configData.object[index].bol = false;
+					userSelectedModelData.push(tmpObject);
+				} else if (configData.object[index].bol && tmpObject.selectedObject_id === 'refrigerator_convertible') {
+					console.log('refrigerator_convertible');
+					configData.object[index].bol = false;
+					userSelectedModelData.push(tmpObject);
+				} else if (configData.object[index].bol && tmpObject.selectedObject_id === 'wash') {
+					console.log('wash');
+					configData.object[index].bol = false;
+					userSelectedModelData.push(tmpObject);
+				} else if (configData.object[index].bol && tmpObject.selectedObject_id === 'clean') {
+					console.log('clean');
+					configData.object[index].bol = false;
+					userSelectedModelData.push(tmpObject);
+				} else if (configData.object[index].bol && tmpObject.selectedObject_id === 'styler') {
+					console.log('styler');
+					configData.object[index].bol = false;
+					userSelectedModelData.push(tmpObject);
+				} else {
+					console.log('데이터 변경');
+					for (let i = 0; i < userSelectedModelData.length; i++) {
+						if (userSelectedModelData[i].selectedObject_id === 'refrigerator') {
+							console.log(userSelectedModelData[i] = tmpObject);
+						}
+					}
+				}
 				console.log(userSelectedModelData)
-
 
 
 			} else {
