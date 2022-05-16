@@ -82,6 +82,7 @@ var bol2 = true;
       object: [
          {
             id: 'refrigerator',
+            bol: true,
             name: 'InstaViewTM',
             icon: { default: 'Thumb_01.png', focus: 'Thumb_01_selected.png' },
             offset: { top: 328, left: 295, },
@@ -1801,30 +1802,6 @@ var bol2 = true;
 
          //사용자 선택 값 구조
          if (existIndex == -1) { //선택 영역 동일 오브제 id없을 때만 생성
-
-
-
-            if (bol1 && tmpObject.selectedObject_id === 'refrigerator') {
-               console.log('1번째 냉장고')
-               bol1 = false;
-               userSelectedModelData.push(tmpObject);
-               console.log(userSelectedModelData)
-            } else if (bol2 && tmpObject.selectedObject_id === 'refrigerator_convertible') {
-               console.log('2번째 냉장고')
-               bol2 = false;
-               userSelectedModelData.push(tmpObject);
-               console.log(userSelectedModelData)
-            } else {
-               console.log('본품클릭')
-               for (let i = 0; i < userSelectedModelData.length; i++) {
-                  if (userSelectedModelData[i].selectedObject_id === 'refrigerator') {
-                     for (let j = 0; tmpObject.selectedObject_desc.length; j++) {
-                        // userSelectedModelData[i].selectedObject_desc[j].selectedObjectSelectedSurface = '으하하하하하무슨색/'
-                     }
-                  }
-               }
-            }
-
             var tmpObject = {
                selectedObject_id: configData.object[index].id,
                selectedObject_name: configData.object[index].name,
@@ -1848,12 +1825,32 @@ var bol2 = true;
                tmpObject.selectedObject_complete = true;
                tmpObject.selectedObject_set_name = colorSetName;
             }
+
             userSelected.selectedObjet.push(tmpObject);
+            // userSelectedModelData.push(tmpObject);
+
+            console.log(userSelected.selectedObjet)
 
 
+            // 처음에 돌때만  push 하고, 2. 다음 클릭시 부터는 변경한다.
+            if (bol1 && tmpObject.selectedObject_id === 'refrigerator') {
+               console.log('1번째 냉장고')
+               bol1 = false;
+               userSelectedModelData.push(tmpObject);
+            } else if (bol2 && tmpObject.selectedObject_id === 'refrigerator_convertible') {
+               console.log('2번째 냉장고')
+               bol2 = false;
+               userSelectedModelData.push(tmpObject);
+            } else {
+               console.log('본품클릭')
+               for (let i = 0; i < userSelectedModelData.length; i++) {
+                  if (userSelectedModelData[i].selectedObject_id === 'refrigerator') {
+                     console.log(userSelectedModelData[i] = tmpObject)
+                  }
+               }
+            }
 
-
-
+            console.log(userSelectedModelData)
 
          } else {
             var existSelectionIndex = 0;
