@@ -1827,7 +1827,7 @@ var bol1 = true, bol2 = true;
             userSelected.selectedObjet.push(tmpObject);
             // userSelectedModelData.push(tmpObject);
 
-            // 처음에 돌때만  push 하고, 2. 다음 클릭시 부터는 변경한다.
+            // 처음에 돌때만  push 하고, 2. 다음 클릭시 부터는 변경.
             if (bol1 && tmpObject.selectedObject_id === 'refrigerator') {
                console.log('1번째 냉장고')
                bol1 = false;
