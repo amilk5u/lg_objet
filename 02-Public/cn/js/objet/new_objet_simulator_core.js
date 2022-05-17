@@ -1772,7 +1772,7 @@ var colorDefault = [];
 						selectedObjectSelectedModelId: configData.object[index].selections[selectionIndex].Surface[surfaceIndex].modelId
 					}]
 				};
-				
+
 
 				//처음 부터 컬러세트 설정일 경우
 				if (isFavSet) {
@@ -1799,6 +1799,14 @@ var colorDefault = [];
 					}
 				} */
 
+
+				for (let i = 0; i < configData.object.length; i++) {
+					console.log(i)
+					if (configData.object[index].bol && configData.object[index].id === configData.object[i].id) {
+						console.log('?')
+						console.log(configData.object[i].id)
+					}
+				}
 
 				if (configData.object[index].bol && tmpObject.selectedObject_id === 'refrigerator') {
 					console.log('refrigerator');
@@ -2906,6 +2914,5 @@ var colorDefault = [];
 			return false;
 		}
 	}
-
 	return Simulator;
 });

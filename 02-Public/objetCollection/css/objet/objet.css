@@ -289,6 +289,13 @@
 #purchase_popup .purchase_list ul li .go_detail{display:block;width:84%;margin:20px auto 0;border:1px solid #e1e1e1;text-align:center;font-size:16px;line-height:40px;color:#666666;}
 #purchase_popup .purchase_list ul li .go_detail.au_go_detail_btn1,#purchase_popup .purchase_list ul li .go_detail.au_go_detail_btn2,#purchase_popup .purchase_list ul li .go_detail.au_go_detail_btn3 {line-height:1.4 !important;padding:10px 0 !important; width:90% !important}
 #purchase_popup .purchase_list ul li .go_detail + .go_detail{width:84%;margin:10px auto 0;}
+
+/*@2022-05-18 장바구니 CTA 추가 (s)*/
+#purchase_popup .purchase_list ul li .btn_cta {
+	display:block; width:90%; margin:20px auto 0; border:1px solid #e1e1e1; text-align:center; font-size:16px; line-height:1.4; color:#666666; padding:10px 0; font-family:"LG Smart","Segoe UI","Microsoft Sans Serif",sans-serif;
+}
+/*@2022-05-18 장바구니 CTA 추가 (e)*/
+
 #purchase_popup .comment_txt{margin-top:35px;text-align:center;font-size:13px;color:#666666;font-weight:300;}
 .inner_contents .objet_popup .pop_inner{width:350px;padding:40px 15px;text-align:center;}
 .inner_contents .objet_popup .pop_inner strong{font-size:20px;color:#222222;font-weight:700;}
@@ -583,6 +590,14 @@
 .simulator_nav .active .btn-nav{text-decoration: underline;}
 .select_objet:after{background:transparent;}
 .select_objet_list .type01 .h3Tile{font-size:22px;font-weight:700;color:#181818;text-align:center;}
+
+/*@2022-05-18 선택값에 따라 select_objet 타이틀 변경 (s)*/
+.select_objet_list .type01 .h3Tile > span {display:block; color:mediumseagreen;}
+.select_objet_list .type01 .h3Tile > span em {color:#181818;}
+.select_objet_list .type01 .h3Tile > em {display:block; font-size:14px; color:red; font-weight:400;}
+.select_objet_list .type01 .h3Tile > em span {font-weight:700;}
+/*@2022-05-18 선택값에 따라 select_objet 타이틀 변경 (e)*/
+
 .select_objet .type01 .objet-bx .scroll-content{height:auto;padding:30px;white-space: normal;}
 .select_objet .type01 .objet-bx .scroll-content .select_objet_item{display:block;margin-left:0;}
 .select_objet .type01 .objet-bx .scroll-content .select_objet_item + .select_objet_item{margin-top:30px;}

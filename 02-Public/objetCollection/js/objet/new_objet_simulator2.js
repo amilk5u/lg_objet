@@ -5,6 +5,7 @@ if (objSimulator !== 'undefined') {
 	var simulator = new objSimulator();
 	simulator.init();
 
+
 	//배경 변경 부
 	var queryURL = window.location.search;
 	//var urlParams = new URLSearchParams(queryURL);
@@ -113,8 +114,13 @@ if (objSimulator !== 'undefined') {
 				});
 			}
 		});
+
 	}
 }
+
+
+
+
 
 
 
@@ -138,6 +144,7 @@ $(".btn-style").on("click", function () {
 			bgT = "C_";
 		}
 		let imgW = $(this).find("img").width();
+		/* CMS 업로드시 수정필요 */
 		// let bgUrlFront = "/au/images/objet/simulator/bg/";
 		let bgUrlFront = "images/objet/simulator/bg/";
 		let bgUrl = "bg_" + bgType + "_" + bgT + "0" + (idx + 1) + ".png"
@@ -164,8 +171,6 @@ $(".lg-appliances input[type=checkbox]").on("click", function () {
 
 		simulator.selectObject(this.value, null);
 
-		console.log(simulator.selectObject(this.value, null))
-
 		//기기 변경 시 마다 컬러 선택 알림 초기화
 		var colorWarningPopup = document.querySelector('.color_warning_popup') !== null ?
 			document.querySelector('.color_warning_popup') : false;
@@ -190,7 +195,6 @@ $(".lg-appliances input[type=checkbox]").on("click", function () {
 $(".object-app").on("click", function () {
 	$(".object-app").removeClass("active");
 	$(this).addClass("active");
-	console.log($(this));
 	//this.slides[navindex].classList.add('active-background');
 });
 
@@ -213,26 +217,31 @@ function tooltipOpen(e) {
 	if (thisA == "FENIX") {
 		var title = "FENIX";
 		var ptext = "감각적인 디자인을 완성하는 프리미엄 신소재로 손 끝은 스치는 부드러움과 스스로 재생되는 신비로움을 경험할 수 있습니다.";
+		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-fenix.jpg' />";
 		var img = "<img src='images/objet/img-fenix.jpg' />";
 	} else if (thisA == "Calming") {
 		var title = "Calming";
 		var ptext = "It is strong as well as light weight, and has a unique transparency and smooth finish to create a neat, tidy and calm space.";
+		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-Calming.jpg' />";
 		var img = "<img src='images/objet/img-Calming.jpg' />";
 	} else if (thisA == "Solid Metal") {
 		var title = "Solid Metal";
 		var ptext = "Matte stainless, a perfect harmony of matte finish reflecting metal's natural refinement and trends, makes a place a modern and beautiful one.";
+		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-Solid.jpg' />";
 		var img = "<img src='images/objet/img-Solid.jpg' />";
 	} else if (thisA == "Mist Glass") {
 		var title = "Mist Glass";
 		var ptext = "Matte glass that is soft to the touch and refined enough for any space";
+		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-Mist.jpg' />";
 		var img = "<img src='images/objet/img-Mist.jpg' />";
 	} else if (thisA == "Nature Metal") {
 		var title = "Nature Metal";
 		var ptext = "It is a metal material with a texture following nature, and shows a calm and relaxing sense regardless of a space.";
+		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-Nature.jpg' />";
 		var img = "<img src='images/objet/img-Nature.jpg' />";
 	}
@@ -249,6 +258,7 @@ $(".layer_popup .btn-close").on("click", function () {
 });
 
 $("#save").on("click", function () {
+
 	simulator.updateObjetSelected();
 	//console.log('$("#refrigerator_convertible_L").val()',$("#refrigerator_convertible_L").val());
 	//console.log('$("#refrigerator_convertible_M").val()',$("#refrigerator_convertible_M").val());
@@ -299,9 +309,13 @@ $("#save").on("click", function () {
 			//popCont += '		<span class="nm">'+nmTxt+'</span>';
 			popCont += '	</div>';
 			popCont += '	<p class="direct_txt">Learn more</p>';
+
+			//@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (s)
 			// popCont += '	<a href="' + tarLinkA + '" ' + target + ' class="go_detail au_go_detail_btn1" data-link-name="move to larder Learn more"><span>Single Door<br>Fridge</span></a>';
 			// popCont += '	<a href="' + tarLinkF + '" ' + target + ' class="go_detail au_go_detail_btn2" data-link-name="move to freezer Learn more"><span>Upright<br>Freezer</span></a>';
-			popCont += '	<button type="button" class="btn_cta" data-objet-id="refrigerator_convertible_L">Cart CTA - A</button>';
+			popCont += '	<button type="button" class="btn_cta" data-objet-id="refrigerator_convertible_L">Add To Cart</button>';
+			//@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (e)
+
 			popCont += '</li>';
 		}
 		if ($("#refrigerator_convertible_M").val() != "") {//freezer
@@ -348,9 +362,13 @@ $("#save").on("click", function () {
 			//popCont += '		<span class="nm">'+nmTxt+'</span>';
 			popCont += '	</div>';
 			popCont += '	<p class="direct_txt">Learn more</p>';
+
+			//@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (s)
 			// popCont += '	<a href="' + tarLinkA + '" ' + target + ' class="go_detail au_go_detail_btn1" data-link-name="move to larder Learn more"><span>Single Door<br>Fridge</span></a>';
 			// popCont += '	<a href="' + tarLinkF + '" ' + target + ' class="go_detail au_go_detail_btn2" data-link-name="move to freezer Learn more"><span>Upright<br>Freezer</span></a>';
-			popCont += '	<button type="button" class="btn_cta" data-objet-id="refrigerator_convertible_M">Cart CTA - B</button>';
+			popCont += '	<button type="button" class="btn_cta" data-objet-id="refrigerator_convertible_M">Add To Cart</button>';
+			//@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (e)
+
 			popCont += '</li>';
 		}
 
@@ -362,8 +380,10 @@ $("#save").on("click", function () {
 			let colorNmRB = $("#refrigerator_RB").val();
 			let mixNm = imgUrl + nm + "/ico/rf_default.png";
 
-			//images/objet/simulator/appliances/rf/ico/rf_st_green_st_silver_st_silver.png
-			let userSelectImg = imgUrl + nm + "/ico/rf_" + colorNmLT + "_" + colorNmLB + "_" + colorNmRB + ".png";
+			//@2022-05-18 선택값에 따른 냉장고 이미지 추출 변수선언 (s)
+			//ex) images/objet/simulator/appliances/rf/ico/rf_st_green_st_silver_st_silver.png
+			let userSelectImg = imgUrl+nm+"/ico/rf_"+colorNmLT+"_"+colorNmLB+"_"+colorNmRB+".png";
+			//@2022-05-18 선택값에 따른 냉장고 이미지 추출 변수선언 (e)
 
 			let tarLink = 'javascript:noSale();';
 			let arLink = 'https://lgarexperience.com/ha/objet/M870/stsgreensliver';
@@ -373,11 +393,19 @@ $("#save").on("click", function () {
 			popCont += '<li>';
 			popCont += '	<div class="pic_box">';
 			popCont += '		<a href="' + arLink + '" target="_blank" class="go_ar" data-link-name="move to Next6 ar"></a>';
+
+			//@2022-05-18 선택값에 따른 냉장고 이미지 추출 (s)
 			// popCont += '		<img src="' + mixNm + '" alt="" class="rf_default" />';
-			popCont += '		<img src="' + userSelectImg + '" alt="" class="rf_userSelectImage" />';
+			popCont += '		<img src="'+userSelectImg+'" alt="" class="rf_userSelectImage" />';
+			//@2022-05-18 선택값에 따른 냉장고 이미지 추출 (e)
+
 			popCont += '	</div>';
+
+			//@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (s)
 			// popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail au_go_detail_btn3" data-link-name="move to Next6 Learn more"><span>InstaView®<br>French Door Fridge</span></a>';
-			popCont += '	<button type="button" class="btn_cta" data-objet-id="refrigerator">Cart CTA</button>';
+			popCont += '	<button type="button" class="btn_cta" data-objet-id="refrigerator">Add To Cart</button>';
+			//@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (e)
+
 			popCont += '</li>';
 		}
 
@@ -542,53 +570,332 @@ $("#save").on("click", function () {
 	});*/
 });
 
-// 장바구니 CTA
+//@2022-05-18 장바구니 API 연동 (s)
 var cartDataArr_refrigerator = [];
 var cartDataArr_refrigerator_convertible_L = [], cartDataArr_refrigerator_convertible_M = [];
 
 // 객체값 체크
-function isEmptyObj(obj) {
-	if (obj.constructor === Object
-		&& Object.keys(obj).length === 0) {
+function isEmptyObj(obj)  {
+	if(obj.constructor === Object
+		&& Object.keys(obj).length === 0)  {
 		return true;
 	}
 	return false;
 }
 
-$("body").on("click", ".btn_cta", function () {
+// 장바구니 화면내에 CTA 클릭시
+$("body").on("click", ".btn_cta", function(){
 	var $this = $(this);
 	var $objetId = $this.data("objet-id");
+	console.log("userSelectedModelData",userSelectedModelData);
 
-	console.log("(userSelectedModelData) : ", userSelectedModelData);
-
-	for (var itemIdx = 0; itemIdx < userSelectedModelData.length; itemIdx++) {
-		if (userSelectedModelData[itemIdx].selectedObject_id == "refrigerator") {
+	for (var itemIdx=0; itemIdx<userSelectedModelData.length; itemIdx++){
+		if(userSelectedModelData[itemIdx].selectedObject_id == "refrigerator"){
 			//냉장고 모델명 (양문형은 3개가 동일)
-			console.log(userSelectedModelData[itemIdx].selectedObject_modelIds[itemIdx].selectedObject_modelId);
-
 			var productModelId = userSelectedModelData[itemIdx].selectedObject_modelIds[itemIdx].selectedObject_modelId;
-			var userSelectColors = {};
+			var productModelCode = userSelectedModelData[itemIdx].selectedObject_modelIds[itemIdx].selectedObject_modelCode;
+			var userSelectData = {};
 
-			for (var descIdx = 0; descIdx < userSelectedModelData[itemIdx].selectedObject_desc.length; descIdx++) {
-				if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_LT" 
-				&& userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_green") {
+			for (var descIdx=0; descIdx<userSelectedModelData[itemIdx].selectedObject_desc.length; descIdx++){
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_LT" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_green"){
 					// 판넬 모델명
-					userSelectColors.refrigerator_LT = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					// userSelectData.refrigerator_LT = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					userSelectOpts = {};
+					userSelectOpts.modelId = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					userSelectOpts.modelCode = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelCode;
+					userSelectOpts.modelColor = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface;
+					userSelectData.refrigerator_LT = userSelectOpts;
 				}
-				if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_LB" 
-				&& userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver") {
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_LB" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
 					// 판넬 모델명
-					userSelectColors.refrigerator_LB = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					// userSelectData.refrigerator_LB = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					userSelectOpts = {};
+					userSelectOpts.modelId = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					userSelectOpts.modelCode = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelCode;
+					userSelectOpts.modelColor = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface;
+					userSelectData.refrigerator_LB = userSelectOpts;
 				}
-				if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_RB" 
-				&& userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver") {
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_RB" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
 					// 판넬 모델명
-					userSelectColors.refrigerator_RB = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					// userSelectData.refrigerator_RB = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					userSelectOpts = {};
+					userSelectOpts.modelId = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+					userSelectOpts.modelCode = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelCode;
+					userSelectOpts.modelColor = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface;
+					userSelectData.refrigerator_RB = userSelectOpts;
 				}
 			}
+
 			cartDataArr_refrigerator = [];
-			
-			if (isEmptyObj(userSelectColors)) {
+			if(isEmptyObj(userSelectData)){
+				var cartData = {
+					data: { sku: productModelId, qty: 1 },
+					zipcode: "2000"
+				}
+				cartDataArr_refrigerator.push(cartData);
+			}else{
+				for(var key in userSelectData) {
+					// console.log(key, userSelectData[key]);
+					if(userSelectData.refrigerator_LT !== undefined || userSelectData.refrigerator_LB !== undefined || userSelectData.refrigerator_RB !== undefined){
+						var _selectColorInfo, _selectColorInfoArr;
+						var _selectCode, _selectLocation, _selectColor, _selectType;
+						if(key === "refrigerator_LT"){
+							// _selectLocation = "upper_left";
+							_selectLocation = "top";
+							_selectCode = userSelectData.refrigerator_LT.modelCode;
+							_selectColorInfo = userSelectData.refrigerator_LT.modelColor;
+							_selectColorInfoArr =_selectColorInfo.split('_');
+							(_selectColorInfoArr[0] == "st") ? _selectType = "stainless" : _selectType = "glass";
+							(_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
+						}
+						if(key === "refrigerator_LB"){
+							// _selectLocation = "lower_left";
+							_selectLocation = "bottom";
+							_selectCode = userSelectData.refrigerator_LB.modelCode;
+							_selectColorInfo = userSelectData.refrigerator_LB.modelColor;
+							_selectColorInfoArr =_selectColorInfo.split('_');
+							(_selectColorInfoArr[0] == "st") ? _selectType = "stainless" : _selectType = "glass";
+							(_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
+						}
+						if(key === "refrigerator_RB"){
+							// _selectLocation = "lower_right";
+							_selectLocation = "bottom";
+							_selectCode = userSelectData.refrigerator_RB.modelCode;
+							_selectColorInfo = userSelectData.refrigerator_RB.modelColor;
+							_selectColorInfoArr =_selectColorInfo.split('_');
+							(_selectColorInfoArr[0] == "st") ? _selectType = "stainless" : _selectType = "glass";
+							(_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
+						}
+
+						var userSelectOptList = "";
+						userSelectOptList = _selectCode + ',' + _selectLocation + ',' + _selectColor + ',' + _selectType;
+						// console.log(userSelectOptList);
+
+						var cartData = {
+							data: { sku: userSelectData[key].modelId, qty: 1 },
+							zipcode: "2000",
+							lg_custom_options: {
+								objet_sales_options: userSelectOptList,
+								parent_sku: productModelId
+							}
+						}
+						cartDataArr_refrigerator.push(cartData);
+					}
+				}
+			}
+		}
+
+		if(userSelectedModelData[itemIdx].selectedObject_id == "refrigerator_convertible"){
+			var productModelId_L, productModelId_M;
+			var productModelCode_L, productModelCode_M;
+			var userSelectData_L = {}, userSelectData_M = {};
+
+			for (var descIdx=0; descIdx<userSelectedModelData[itemIdx].selectedObject_desc.length; descIdx++){
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_L"){
+					// 냉장고 모델명
+					productModelId_L = userSelectedModelData[itemIdx].selectedObject_modelIds[descIdx].selectedObject_modelId;
+					productModelCode_L = userSelectedModelData[itemIdx].selectedObject_modelIds[descIdx].selectedObject_modelCode;
+					if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
+						// 판넬 모델명
+						// userSelectData_L.refrigerator_convertible = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+						userSelectOpts = {};
+						userSelectOpts.modelId = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+						userSelectOpts.modelCode = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelCode;
+						userSelectOpts.modelColor = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface;
+						userSelectData_L.refrigerator_convertible = userSelectOpts;
+					}
+				}
+
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_M"){
+					// 냉장고 모델명
+					productModelId_M = userSelectedModelData[itemIdx].selectedObject_modelIds[descIdx].selectedObject_modelId;
+					productModelCode_M = userSelectedModelData[itemIdx].selectedObject_modelIds[descIdx].selectedObject_modelCode;
+					if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
+						// 판넬 모델명
+						// userSelectData_M.refrigerator_convertible = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+						userSelectOpts = {};
+						userSelectOpts.modelId = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+						userSelectOpts.modelCode = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelCode;
+						userSelectOpts.modelColor = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface;
+						userSelectData_M.refrigerator_convertible = userSelectOpts;
+					}
+				}
+			}
+
+			cartDataArr_refrigerator_convertible_L = [], cartDataArr_refrigerator_convertible_M = [];
+
+			if(isEmptyObj(userSelectData_L)){
+				var cartData = {
+					data: { sku: productModelId_L, qty: 1 },
+					zipcode: "2000"
+				}
+				cartDataArr_refrigerator_convertible_L.push(cartData);
+			}else{
+				var _selectColorInfo, _selectColorInfoArr;
+				var _selectCode, _selectColor, _selectType;
+
+				_selectCode = userSelectData_L.refrigerator_convertible.modelCode;
+				_selectColorInfo = userSelectData_L.refrigerator_convertible.modelColor;
+				_selectColorInfoArr =_selectColorInfo.split('_');
+				(_selectColorInfoArr[0] == "st") ? _selectType = "stainless" : _selectType = "glass";
+				(_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
+
+				var userSelectOptList = "";
+				userSelectOptList = _selectCode + ',' + _selectColor + ',' + _selectType;
+				// console.log(userSelectOptList);
+
+				var cartData = {
+					data: { sku: userSelectData_L.refrigerator_convertible.modelId, qty: 1 },
+					zipcode: "2000",
+					lg_custom_options: {
+						objet_sales_options: userSelectOptList,
+						parent_sku: productModelId_L
+					}
+				}
+				cartDataArr_refrigerator_convertible_L.push(cartData);
+			}
+
+			if(isEmptyObj(userSelectData_M)){
+				var cartData = {
+					data: { sku: productModelId_M, qty: 1 },
+					zipcode: "2000"
+				}
+				cartDataArr_refrigerator_convertible_M.push(cartData);
+			}else{
+				var _selectColorInfo, _selectColorInfoArr;
+				var _selectCode, _selectColor, _selectType;
+
+				_selectCode = userSelectData_M.refrigerator_convertible.modelCode;
+				_selectColorInfo = userSelectData_M.refrigerator_convertible.modelColor;
+				_selectColorInfoArr =_selectColorInfo.split('_');
+				(_selectColorInfoArr[0] == "st") ? _selectType = "stainless" : _selectType = "glass";
+				(_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
+
+				var userSelectOptList = "";
+				userSelectOptList = _selectCode + ',' + _selectColor + ',' + _selectType;
+				// console.log(userSelectOptList);
+
+				var cartData = {
+					data: { sku: userSelectData_M.refrigerator_convertible.modelId, qty: 1 },
+					zipcode: "2000",
+					lg_custom_options: {
+						objet_sales_options: userSelectOptList,
+						parent_sku: productModelId_M
+					}
+				}
+				cartDataArr_refrigerator_convertible_M.push(cartData);
+			}
+		}
+	}
+
+	if($objetId == "refrigerator"){
+		console.log("refrigerator(Model)",productModelId, "\nrefrigerator(df_Panel*)",userSelectData);
+		console.log("cartItems\n\ncart-refrigerator\n", cartDataArr_refrigerator);
+		console.log(
+			"mutation {"
+			+"\n	addSalesObjectToCart("
+			+"\n		input: {"
+			+"\n			cartItems: ["
+			+JSON.stringify(cartDataArr_refrigerator)
+			+"]"
+			+"\n		}"
+			+"\n	) {"
+			+"\n	redirectUrl"
+			+"\n		cart {"
+			+"\n			items {"
+			+"\n				product {"
+			+"\n					sku"
+			+"\n				}"
+			+"\n				qty"
+			+"\n			}"
+			+"\n		}"
+			+"\n	}"
+			+"\n}"
+		);
+	}
+
+	if($objetId == "refrigerator_convertible_L"){
+		console.log("refrigerator_convertible_L(Model)",productModelId_L,"\nrefrigerator_convertible_L(df_Panel*)",userSelectData_L);
+		console.log("cartItems\n\ncart-refrigerator_convertible_L\n", cartDataArr_refrigerator_convertible_L);
+		console.log(
+			"mutation {"
+			+"\n	addSalesObjectToCart("
+			+"\n		input: {"
+			+"\n			cartItems: ["
+			+JSON.stringify(cartDataArr_refrigerator_convertible_L)
+			+"]"
+			+"\n		}"
+			+"\n	) {"
+			+"\n	redirectUrl"
+			+"\n		cart {"
+			+"\n			items {"
+			+"\n				product {"
+			+"\n					sku"
+			+"\n				}"
+			+"\n				qty"
+			+"\n			}"
+			+"\n		}"
+			+"\n	}"
+			+"\n}"
+		);
+	}
+
+	if($objetId == "refrigerator_convertible_M"){
+		console.log("refrigerator_convertible_M(Model)",productModelId_M,"\nrefrigerator_convertible_M(df_Panel*)",userSelectData_M);
+		console.log("cartItems\n\ncart-refrigerator_convertible_M\n", cartDataArr_refrigerator_convertible_M);
+		console.log(
+			"mutation {"
+			+"\n	addSalesObjectToCart("
+			+"\n		input: {"
+			+"\n			cartItems: ["
+			+JSON.stringify(cartDataArr_refrigerator_convertible_M)
+			+"]"
+			+"\n		}"
+			+"\n	) {"
+			+"\n	redirectUrl"
+			+"\n		cart {"
+			+"\n			items {"
+			+"\n				product {"
+			+"\n					sku"
+			+"\n				}"
+			+"\n				qty"
+			+"\n			}"
+			+"\n		}"
+			+"\n	}"
+			+"\n}"
+		);
+	}
+});
+
+// 본품컬러 선택화면내에있는 CTA 클릭시
+$("body").on("click", ".btn_modelRestBtn", function(){
+	var $this = $(this);
+	var $objetId = $this.data("objet-id");
+	// console.log("userSelectedModelData",userSelectedModelData);
+
+	/*for (var itemIdx=0; itemIdx<userSelectedModelData.length; itemIdx++){
+		if(userSelectedModelData[itemIdx].selectedObject_id == "refrigerator"){
+			//냉장고 모델명 (양문형은 3개가 동일)
+			var productModelId = userSelectedModelData[itemIdx].selectedObject_modelIds[itemIdx].selectedObject_modelId;
+			var userSelectData = {};
+
+			for (var descIdx=0; descIdx<userSelectedModelData[itemIdx].selectedObject_desc.length; descIdx++){
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_LT" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_green"){
+					// 판넬 모델명
+					userSelectData.refrigerator_LT = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+				}
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_LB" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
+					// 판넬 모델명
+					userSelectData.refrigerator_LB = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+				}
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_RB" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
+					// 판넬 모델명
+					userSelectData.refrigerator_RB = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+				}
+			}
+
+			cartDataArr_refrigerator = [];
+			if(isEmptyObj(userSelectData)){
 				var cartData = {
 					data: { sku: productModelId, qty: 1 },
 					lg_custom_options: {
@@ -596,62 +903,64 @@ $("body").on("click", ".btn_cta", function () {
 					}
 				}
 				cartDataArr_refrigerator.push(cartData);
-			} else {
-				// console.log("본품컬러와 다른값", userSelectColors);
-				for (var key in userSelectColors) {
-					// console.log(key, userSelectColors[key]);
-					if (userSelectColors.refrigerator_LT !== undefined || userSelectColors.refrigerator_LB !== undefined || userSelectColors.refrigerator_RB !== undefined) {
+			}else{
+				// console.log("본품컬러와 다른값", userSelectData);
+				for(var key in userSelectData) {
+					// console.log(key, userSelectData[key]);
+					if(userSelectData.refrigerator_LT !== undefined || userSelectData.refrigerator_LB !== undefined || userSelectData.refrigerator_RB !== undefined){
 						var _selectLocation;
-						if (key === "refrigerator_LT") _selectLocation = "top-left";
-						if (key === "refrigerator_LB") _selectLocation = "bottom-left";
-						if (key === "refrigerator_RB") _selectLocation = "bottom-right";
+						if(key === "refrigerator_LT") _selectLocation = "top-left";
+						if(key === "refrigerator_LB") _selectLocation = "bottom-left";
+						if(key === "refrigerator_RB") _selectLocation = "bottom-right";
 						var cartData = {
 							data: { sku: productModelId, qty: 1 },
 							lg_custom_options: {
 								is_object_sale_product: true,
 								position: _selectLocation,
-								parent_sku: userSelectColors[key]
+								parent_sku: userSelectData[key]
 							}
 						}
 						cartDataArr_refrigerator.push(cartData);
 					}
 				}
 			}
-			// console.log("refrigerator(Model)", productModelId, "\nrefrigerator(df_Model)", userSelectColors);
+			// console.log("refrigerator(Model)",productModelId, "\nrefrigerator(df_Panel*)",userSelectData);
 		}
 
-		if (userSelectedModelData[itemIdx].selectedObject_id == "refrigerator_convertible") {
+		if(userSelectedModelData[itemIdx].selectedObject_id == "refrigerator_convertible"){
 			var productModelId_L, productModelId_M;
-			var userSelectColors_L = {};
-			var userSelectColors_M = {};
+			var userSelectData_L = {};
+			var userSelectData_M = {};
 
-			for (var descIdx = 0; descIdx < userSelectedModelData[itemIdx].selectedObject_desc.length; descIdx++) {
-				if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_L") {
+			for (var descIdx=0; descIdx<userSelectedModelData[itemIdx].selectedObject_desc.length; descIdx++){
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_L"){
 					// 냉장고 모델명
 					productModelId_L = userSelectedModelData[itemIdx].selectedObject_modelIds[descIdx].selectedObject_modelId;
-					if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_L" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver") {
+					if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
 						// 판넬 모델명
-						userSelectColors_L.refrigerator_convertible = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+						userSelectData_L.refrigerator_convertible = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
 					}
 				}
 
-				if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_M") {
+				if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_M"){
 					// 냉장고 모델명
 					productModelId_M = userSelectedModelData[itemIdx].selectedObject_modelIds[descIdx].selectedObject_modelId;
-					if (userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelection_id === "refrigerator_convertible_M" && userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver") {
+					if(userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedSurface !== "st_silver"){
 						// 판넬 모델명
-						userSelectColors_M.refrigerator_convertible = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
+						userSelectData_M.refrigerator_convertible = userSelectedModelData[itemIdx].selectedObject_desc[descIdx].selectedObjectSelectedModelId;
 					}
 				}
 			}
 
-			//productModelId_L : MD07553654 / productModelId_M : MD07553636
-			// console.log("refrigerator_convertible_L(Model)", productModelId_L, "\nrefrigerator_convertible_L(df_Model)", userSelectColors_L, "\nrefrigerator_convertible_M(Model)", productModelId_M, "\nrefrigerator_convertible_M(df_Model)", userSelectColors_M);
+			/!*console.log(
+				"refrigerator_convertible_L(Model)",productModelId_L,"\nrefrigerator_convertible_L(df_Panel*)",userSelectData_L,
+				"\nrefrigerator_convertible_M(Model)",productModelId_M,"\nrefrigerator_convertible_M(df_Panel*)",userSelectData_M
+			);*!/
 
 			cartDataArr_refrigerator_convertible_L = [];
 			cartDataArr_refrigerator_convertible_M = [];
 
-			if (isEmptyObj(userSelectColors_L)) {
+			if(isEmptyObj(userSelectData_L)){
 				var cartData = {
 					data: { sku: productModelId_L, qty: 1 },
 					lg_custom_options: {
@@ -659,19 +968,20 @@ $("body").on("click", ".btn_cta", function () {
 					}
 				}
 				cartDataArr_refrigerator_convertible_L.push(cartData);
-			} else {
-				// console.log("본품컬러와 다른값", userSelectColors_L);
+			}else{
+				// console.log("본품컬러와 다른값", userSelectData_L);
 				var cartData = {
 					data: { sku: productModelId_L, qty: 1 },
 					lg_custom_options: {
 						is_object_sale_product: true,
 						// position: _selectLocation,
-						parent_sku: userSelectColors_L.refrigerator_convertible
+						parent_sku: userSelectData_L.refrigerator_convertible
 					}
 				}
 				cartDataArr_refrigerator_convertible_L.push(cartData);
 			}
-			if (isEmptyObj(userSelectColors_M)) {
+
+			if(isEmptyObj(userSelectData_M)){
 				var cartData = {
 					data: { sku: productModelId_M, qty: 1 }, //sku : MD07553654
 					lg_custom_options: {
@@ -679,35 +989,91 @@ $("body").on("click", ".btn_cta", function () {
 					}
 				}
 				cartDataArr_refrigerator_convertible_M.push(cartData);
-			} else {
-				// console.log("본품컬러와 다른값", userSelectColors_M);
+			}else{
+				// console.log("본품컬러와 다른값", userSelectData_M);
 				var cartData = {
 					data: { sku: productModelId_M, qty: 1 },
 					lg_custom_options: {
 						is_object_sale_product: true,
 						// position: _selectLocation,
-						parent_sku: userSelectColors_M.refrigerator_convertible
+						parent_sku: userSelectData_M.refrigerator_convertible
 					}
 				}
 				cartDataArr_refrigerator_convertible_M.push(cartData);
 			}
 		}
-	}
-	// console.log(cartDataArr_refrigerator);
-	// console.log(cartDataArr_refrigerator_convertible);
+	}*/
 
-	if ($objetId == "refrigerator") {
-		console.debug("API\ncart-refrigerator\n", cartDataArr_refrigerator);
+	if($objetId == "refrigerator"){
+		console.log(
+			"mutation {"
+			+"\n	addSalesObjectToCart("
+			+"\n		input: {"
+			// +"\n			cartItems: [{data: { sku: 'MD07545595', qty: 1 },lg_custom_options: {is_object_sale_product: true,}}]"
+			+"\n			cartItems: [{data: { sku: 'MD07545595', qty: 1 },zipcode: '2000'}]"
+			+"\n		}"
+			+"\n	) {"
+			+"\n	redirectUrl"
+			+"\n		cart {"
+			+"\n			items {"
+			+"\n				product {"
+			+"\n					sku"
+			+"\n				}"
+			+"\n				qty"
+			+"\n			}"
+			+"\n		}"
+			+"\n	}"
+			+"\n}"
+		);
 	}
 
-	if ($objetId == "refrigerator_convertible_L") {
-		console.debug("API\ncart-refrigerator_convertible_L\n", cartDataArr_refrigerator_convertible_L);
+	if($objetId == "refrigerator_convertible_L"){
+		console.log(
+			"mutation {"
+			+"\n	addSalesObjectToCart("
+			+"\n		input: {"
+			// +"\n			cartItems: [{data: { sku: 'MD07553654', qty: 1 },lg_custom_options: {is_object_sale_product: true,}}]"
+			+"\n			cartItems: [{data: { sku: 'MD07553654', qty: 1 },zipcode: '2000'}]"
+			+"\n		}"
+			+"\n	) {"
+			+"\n	redirectUrl"
+			+"\n		cart {"
+			+"\n			items {"
+			+"\n				product {"
+			+"\n					sku"
+			+"\n				}"
+			+"\n				qty"
+			+"\n			}"
+			+"\n		}"
+			+"\n	}"
+			+"\n}"
+		);
 	}
 
-	if ($objetId == "refrigerator_convertible_M") {
-		console.debug("API\ncart-refrigerator_convertible_M\n", cartDataArr_refrigerator_convertible_M);
+	if($objetId == "refrigerator_convertible_M"){
+		console.log(
+			"mutation {"
+			+"\n	addSalesObjectToCart("
+			+"\n		input: {"
+			// +"\n			cartItems: [{data: { sku: 'MD07553636', qty: 1 },lg_custom_options: {is_object_sale_product: true,}}]"
+			+"\n			cartItems: [{data: { sku: 'MD07553636', qty: 1 },zipcode: '2000'}]"
+			+"\n		}"
+			+"\n	) {"
+			+"\n	redirectUrl"
+			+"\n		cart {"
+			+"\n			items {"
+			+"\n				product {"
+			+"\n					sku"
+			+"\n				}"
+			+"\n				qty"
+			+"\n			}"
+			+"\n		}"
+			+"\n	}"
+			+"\n}"
+		);
 	}
 });
+//@2022-05-18 장바구니 API 연동 (e)
 
 //색상 경고 팝업 @pck 2020-10-19
 $(".color_warning_popup button").on("click", function () {
@@ -1263,6 +1629,7 @@ function goshop(ord) {
 		} else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_silver") {
 			refrigerator_model = "6324443";
 		} else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_black") {
+		} else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_black") {
 			refrigerator_model = "6324442";
 		} else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_green") {
 			refrigerator_model = "6324441";
@@ -1499,5 +1866,4 @@ function go_shop2(ord) {
 		//$(".layer_popup, .mask").fadeOut();
 	}
 }
-
 
