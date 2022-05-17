@@ -57,13 +57,13 @@ var go_shop_model="";
         backgroundImages : [
             {
                 name : 'modern',
-                images : ['bg_modern_01.png'/*, 'bg_modern_02.png'/*, 'bg_modern_03.png'/*, 'bg_modern_04.jpg'*/]
+                images : ['bg_modern_01.png' , 'bg_modern_02.png', 'bg_modern_03.png'/*, 'bg_modern_04.jpg'*/]
             },
             {   name : 'nature',
-                images : ['bg_nature_01.png'/*, 'bg_nature_02.png'/*, 'bg_nature_03.png'/*, 'bg_nature_04.jpg'*/]
+                images : ['bg_nature_01.png', 'bg_nature_02.png', 'bg_nature_03.png'/*, 'bg_nature_04.jpg'*/]
             },
             {   name : 'nordic',
-                images : ['bg_nordic_01.png'/*, 'bg_nordic_02.png'/*, 'bg_nordic_03.png'/*, 'bg_nordic_04.jpg'*/]
+                images : ['bg_nordic_01.png', 'bg_nordic_02.png', 'bg_nordic_03.png'/*, 'bg_nordic_04.jpg'*/]
             }
         ],
         object : [
