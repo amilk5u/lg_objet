@@ -226,8 +226,8 @@ function tooltipOpen(e) {
 		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-Calming.jpg' />";
 		var img = "<img src='images/objet/img-Calming.jpg' />";
-	} else if (thisA == "Solid Metal") {
-		var title = "Solid Metal";
+	} else if (thisA == "Staninless Steel") {
+		var title = "Staninless Steel";
 		var ptext = "Matte stainless, a perfect harmony of matte finish reflecting metal's natural refinement and trends, makes a place a modern and beautiful one.";
 		/* CMS 업로드시 수정필요 */
 		// var img = "<img src='/au/images/objet/img-Solid.jpg' />";

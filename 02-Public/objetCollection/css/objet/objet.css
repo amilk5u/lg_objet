@@ -563,9 +563,9 @@
 .full .objet_select_slider .obj-swiper-button-prev:before { border-top:2px solid #ffffff; border-left:2px solid #ffffff; transform:translate(-30%, -50%) rotate(-45deg); animation: arrLeft 1s infinite; } 
 .objet input[name='objet-selected']:checked ~ .objet_base .active p { position:relative; opacity:1; } 
 .objet input[name='objet-selected']:checked ~ .objet_base .active p:before { position:absolute; content:''; display:block; left:10px; right:10px; top:10px; bottom:10px; border:2px dashed rgba(199,0,76,.7); } 
-.select_objet.active { bottom:50%; right:14%; width:auto; height:auto; border-radius:18px; overflow:hidden; transform: translateY(50%); } 
+.select_objet.active { width: 370px !important;; bottom:50%; right:14%; width:auto; height:auto; border-radius:18px; overflow:hidden; transform: translateY(50%); } 
 .select_objet .objet-bx { height:0; } 
-.select_objet.active .objet-bx { position:relative; width:338px; height:auto; } 
+.select_objet.active .objet-bx { position:relative; width:338px; height:auto; margin:0 auto; } 
 .simulator_nav .btn-nav { font-size:18px; font-weight:700; color:#a50034; } 
 .simulator_nav .active .btn-nav { text-decoration: underline; } 
 .select_objet:after { background:transparent; } 
@@ -578,11 +578,12 @@
 /* .select_objet_list .type01 .h3Tile > em { display:block; font-size:14px; color:red; font-weight:400; } */
 /* .select_objet_list .type01 .h3Tile > em span { font-weight:700; } */
 
-.select_objet .type01 .objet-bx .scroll-content .select_objet_item.main_color_wrap { width:90% !important; border:1px solid #eeedee; padding:10px; border-radius: 20px; box-sizing: border-box; box-shadow: 0 5px 20px #e1e1e1; } 
+.select_objet .type01 .objet-bx .scroll-content .main_tooltip { padding:0 30px 12px; display: inline-block; position: relative; vertical-align: top; font-size: 18px; font-weight: 600;  color:#be575c; } 
+.select_objet .type01 .objet-bx .scroll-content .select_objet_item .main_color_wrap { width:95% !important; margin:0 auto; border:1px solid #eeedee; padding:10px; border-radius: 20px; box-sizing: border-box; box-shadow: 0 5px 10px #e1e1e1; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap:after { content: ""; display: block; clear: both; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap .img_wrap { width:100px; height:110px; float:left; display: flex; padding:14px 0; background-color: #f2f2f2; border-radius: 20px; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap .img_wrap img { display: block; margin:0 auto; } 
-.select_objet .type01 .objet-bx .scroll-content .main_color_wrap .txt_wrap { width:182px; float:left; padding:0 0 0 10px; box-sizing: border-box; } 
+.select_objet .type01 .objet-bx .scroll-content .main_color_wrap .txt_wrap { width:max-content; float:left; padding:0 0 0 10px; box-sizing: border-box; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap .txt_wrap span { color:#686868; font-size: 15px; font-weight: 700; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap .txt_wrap p { color:#686868; font-size: 13px; font-weight: 600; line-height: 15px; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap .txt_wrap span.price_num { padding:3px 0 0; color:#da5544; font-size: 16px; font-weight: 700; display: block; } 
@@ -592,6 +593,7 @@
 
 .select_objet .type01 .objet-bx .scroll-content { height:auto; white-space: normal; padding:15px 0 30px; } 
 .select_objet .type01 .objet-bx .scroll-content .select_objet_item { width: 100% !important; display:block; padding:0 30px; margin:0 auto; } 
+.select_objet .type01 .objet-bx .scroll-content .select_objet_item:last-child { padding:0; } 
 .select_objet .type01 .objet-bx .scroll-content .select_objet_item + .select_objet_item { margin-top:30px; } 
 .select_objet_item .name { padding-top:0; white-space: nowrap; } 
 .select_objet_item .btn-Tooltip { top:50%; transform:translateY(-50%); } 
@@ -609,19 +611,20 @@
  .bg_type_sel.type02 .objet-bx > ul { padding:25px 20px 0 20px; } 
 .bg_type_sel.type02 .objet-bx > ul > li button { width:70px; padding-top:70px; } 
 .bg_type_sel.type02 .objet-bx > ul > li button:after { padding-top:70px; } 
-.select_objet.active { left:15px; right:15px; bottom:15px; transform: translateY(0); } 
+.select_objet.active { width: auto !important; left:15px; right:15px; bottom:15px; transform: translateY(0); } 
 .select_objet.active .objet-bx { width:auto; } 
 .select_objet_list .type01 .h3Tile { display:none; } 
 .select_objet .type01 .objet-bx .scroll-content { padding:10px; white-space: nowrap; } 
-.select_objet .type01 .objet-bx .scroll-content .select_objet_item { width: auto !important;  display:inline-block; padding:0; } 
+.select_objet .type01 .objet-bx .scroll-content .select_objet_item { width: auto !important; display:inline-block; padding:0; } 
 .select_objet .type01 .objet-bx .scroll-content .select_objet_item + .select_objet_item { margin-left:40px; margin-top:0px; } 
 .select_objet_item > ul > li { width:50px; } 
 .select_objet_item > ul > li .btn-objet { width:50px; padding-top:50px; font-size:12px; background-size:43px; } 
 .select_objet_item > ul > li .btn-objet:after { width:47px; padding-top:47px; left:50%; transform:translateX(-50%); } 
 
-.select_objet .type01 .objet-bx .scroll-content .select_objet_item.main_color_wrap { width:340px !important; margin:10px 30px 20px 40px; border-radius: 10px; } 
+.select_objet .type01 .objet-bx .scroll-content .main_tooltip { padding:0; } 
+.select_objet .type01 .objet-bx .scroll-content .select_objet_item .main_color_wrap { width:340px !important; margin:10px 30px 20px 0; border-radius: 10px; } 
 .select_objet .type01 .objet-bx .scroll-content .main_color_wrap .img_wrap { width:100px; height:110px; padding:14px 0; border-radius: 10px; } 
-.select_objet .type01 .objet-bx .scroll-content .main_color_wrap .btn_wrap button { font-size: 12px; padding:2px 11px 4px; }
+.select_objet .type01 .objet-bx .scroll-content .main_color_wrap .btn_wrap button { font-size: 12px; padding:2px 11px 4px; } 
 
 #purchase_popup .purchase_list ul li { flex:.5; } 
 #purchase_popup .purchase_list ul li .pic_box { width:35vw; } 
