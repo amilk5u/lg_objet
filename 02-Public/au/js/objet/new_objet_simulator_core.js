@@ -173,8 +173,8 @@ var userSelectedModelData = [];
 							  { name : '페닉스<br />스톤', colorChip : 'color_01fn_stone.png', colorCode : 'fn_stone'},
 						 ],
 					},*/
-               /* 220518 start */
-               //@2022-05-18 컬러네임수정 (s)
+					/* 220518 start */
+					//@2022-05-18 컬러네임수정 (s)
 					{
 						name: 'Stainless Steel',
 						colors: [
@@ -194,16 +194,16 @@ var userSelectedModelData = [];
 						],
 						price: '$299', //판넬가격 표기
 					},
-               /* 220518 end */
-               //@2022-05-18 컬러네임수정 (e)
-               /*
-                        /*{ name : '네이쳐',
-                            colors : [
-                                { name : '네이쳐<br />그레이', colorChip : 'color_04nm_gray.png', colorCode : 'nm_gray'},
-                                { name : '네이쳐<br />블랙', colorChip : 'color_04nm_black.png', colorCode : 'nm_black'},
-                                { name : '네이쳐<br />화이트', colorChip : 'color_04nm_white.png', colorCode : 'nm_white'},
-                            ],
-                        },*/
+					/* 220518 end */
+					//@2022-05-18 컬러네임수정 (e)
+					/*
+								/*{ name : '네이쳐',
+									 colors : [
+										  { name : '네이쳐<br />그레이', colorChip : 'color_04nm_gray.png', colorCode : 'nm_gray'},
+										  { name : '네이쳐<br />블랙', colorChip : 'color_04nm_black.png', colorCode : 'nm_black'},
+										  { name : '네이쳐<br />화이트', colorChip : 'color_04nm_white.png', colorCode : 'nm_white'},
+									 ],
+								},*/
 				],
 				// 본품가격 표기
 				mainColor: [
@@ -402,7 +402,7 @@ var userSelectedModelData = [];
                         },*/
 				],
 				supportedSurface: [
-               /* 220518 start */
+					/* 220518 start */
 					{
 						name: 'Stainless Steel',
 						colors: [
@@ -422,15 +422,15 @@ var userSelectedModelData = [];
 						],
 						price: '$399', //판넬가격 표기
 					}
-               /* 220518 end */
-               /*,
-                        { name : '네이쳐',
-                            colors : [
-                                { name : '네이쳐<br />그레이', colorChip : 'color_04nm_gray.png', colorCode : 'nm_gray'},
-                                { name : '네이쳐<br />블랙', colorChip : 'color_04nm_black.png', colorCode : 'nm_black'},
-                                { name : '네이쳐<br />화이트', colorChip : 'color_04nm_white.png', colorCode : 'nm_white'},
-                            ],
-                        },*/
+					/* 220518 end */
+					/*,
+								{ name : '네이쳐',
+									 colors : [
+										  { name : '네이쳐<br />그레이', colorChip : 'color_04nm_gray.png', colorCode : 'nm_gray'},
+										  { name : '네이쳐<br />블랙', colorChip : 'color_04nm_black.png', colorCode : 'nm_black'},
+										  { name : '네이쳐<br />화이트', colorChip : 'color_04nm_white.png', colorCode : 'nm_white'},
+									 ],
+								},*/
 				],
 				// 본품가격 표기
 				mainColor: [
@@ -2207,7 +2207,7 @@ var userSelectedModelData = [];
 					//@2022-05-18 본품컬러 일괄선택 추가 (s)
 					var model_price;
 
-               /* 220518 start */
+					/* 220518 start */
 					if (ID === "refrigerator") {
 						for (var i = 0; i < configData.object.length; i++) {
 							if (configData.object[i].id === "refrigerator") {
@@ -2250,7 +2250,7 @@ var userSelectedModelData = [];
 							outputHtml += '</div>';
 						}
 					}
-               /* 220518 end */
+					/* 220518 end */
 					//@2022-05-18 본품컬러 일괄선택 추가 (e)
 
 					targetSideBarArea.innerHTML = outputHtml;
@@ -2288,8 +2288,8 @@ var userSelectedModelData = [];
 				} else {
 					//@2022-05-18 본품컬러 일괄선택 추가 (s)
 					var model_price;
-               
-               /* 220518 start */
+
+					/* 220518 start */
 					if (ID === "refrigerator") {
 						for (var i = 0; i < configData.object.length; i++) {
 							if (configData.object[i].id === "refrigerator") {
@@ -2299,7 +2299,7 @@ var userSelectedModelData = [];
 						outputHtml += '<div class="select_objet_item">';
 						outputHtml += '<p class="main_tooltip">Choose a Recommended Color</p>';
 						outputHtml += '<div class="main_color_wrap">';
-						outputHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf/ico/refrigerator_img.png" alt=""/></div>';                  
+						outputHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf/ico/refrigerator_img.png" alt=""/></div>';
 						outputHtml += '<div class="txt_wrap"> <span>LG InstaView Objet Collection</span> <p>617L French Door Fridge </br>Green & Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
 						outputHtml += '<div class="btn_wrap"> <button type="button" id="refrigeratorSetBtn" class="mainColorSet">Select</button> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator" data-setting-btn="refrigeratorSetBtn">Add to Cart</button> </div>';
 						outputHtml += '</div>';
@@ -2332,7 +2332,7 @@ var userSelectedModelData = [];
 							outputHtml += '</div>';
 						}
 					}
-               /* 220518 end */
+					/* 220518 end */
 					//@2022-05-18 본품컬러 일괄선택 추가 (e)
 
 					targetSideBarArea.innerHTML = outputHtml;
