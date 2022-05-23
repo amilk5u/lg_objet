@@ -1,0 +1,4 @@
+JSON.stringify({
+	"query": "mutation { addObjetSalesToCart( input: { cartItems: [{ \"data\":{\"sku\":\"MD07545595\",\"qty\":1},\"zipcode\":\"2000\"}] }) {redirectUrl cart { items { product { sku } qty } } } }"
+})
+
