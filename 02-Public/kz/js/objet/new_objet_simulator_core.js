@@ -57,31 +57,31 @@ var go_shop_model="";
         backgroundImages : [
             {
                 name : 'modern',
-                images : ['bg_modern_01.png' , 'bg_modern_02.png', 'bg_modern_03.png'/*, 'bg_modern_04.jpg'*/]
+                images : ['bg_modern_01.png', 'bg_modern_04.png', 'bg_modern_02.png', 'bg_modern_03.png']
             },
             {   name : 'nature',
-                images : ['bg_nature_01.png', 'bg_nature_02.png', 'bg_nature_03.png'/*, 'bg_nature_04.jpg'*/]
+                images : ['bg_nature_01.png', 'bg_nature_04.png', 'bg_nature_02.png', 'bg_nature_03.png']
             },
             {   name : 'nordic',
-                images : ['bg_nordic_01.png', 'bg_nordic_02.png', 'bg_nordic_03.png'/*, 'bg_nordic_04.jpg'*/]
+                images : ['bg_nordic_01.png', 'bg_nordic_04.png', 'bg_nordic_02.png', 'bg_nordic_03.png']
             }
         ],
         object : [
             {
-                id :        'refrigerator', //jh_냉장고
+                id :        'refrigerator',
                 name :      'InstaViewTM',
-                icon :      { default : 'Thumb_01.png', focus : 'Thumb_01_selected.png'}, //jh_applicances 폴더에 대표 이미지 및 아이콘 설정
-                offset :    { top : 328, left : 295, }, //jh_좌표값에 맞춰서 위치조정
-                size :      { width : 244, height : 492, }, //jh_설정된 사이즈로 생성
-                selectedImage : 'appliances/rf/rf_selected.png', //jh_냉장고를 선택하고있다는 표시
+                icon :      { default : 'Thumb_01.png', focus : 'Thumb_01_selected.png'},
+                offset :    { top : 328, left : 295, },
+                size :      { width : 244, height : 492, },
+                selectedImage : 'appliances/rf/rf_selected.png',
                 slideIndex : 0,
-                shop_link : 'https://lgobjetcollection.co.kr/', //jh_?
+                shop_link : 'https://lgobjetcollection.co.kr/',
                 spotButton : {
-                    offset :    { top : 12, left : 12, }, //jh_?
+                    offset :    { top : 12, left : 12, },
                 },
                 selections : [ // 가전 별 선택 가능한 영역
                     {
-                        id :        'refrigerator_LT', //jh_냉장고 상부 왼쪽
+                        id :        'refrigerator_LT',
                         offset :    { top : 328, left : 295, },
                         size :      { width : 121, height : 266, },
                         placeholder : 'appliances/rf/rf_door01_nomal.png',
@@ -501,7 +501,7 @@ var go_shop_model="";
                     },
                 ],
             },*/
-            /*{
+            {
                 id :        'wash',
                 name :      'WashTowerTM',
                 icon :      { default : 'Thumb_07.png', focus : 'Thumb_07_selected.png'},
@@ -544,11 +544,10 @@ var go_shop_model="";
                         colors : [
                             { name : '<span class="lang_kz">жасыл</span><span class="lang_ru">зеленый</span>', colorChip : 'color_04nm_green.png', colorCode : 'nm_green'},
                             { name : '<span class="lang_kz">сарғыш</span><span class="lang_ru">бежевый</span>', colorChip : 'color_04nm_beige.png', colorCode : 'nm_beige'},
-                            /*{ name : '네이쳐<br />핑크', colorChip : 'color_04nm_pink.png', colorCode : 'nm_pink'},*/
-            /*],
-        },
-    ],
-},*/
+                        ],
+                    },
+                ],
+            },
             /*{
                 id :        'clean',
                 name :      'All-in-one TowerTM',
@@ -583,7 +582,7 @@ var go_shop_model="";
                     },
                 ],
             },*/
-            /*{
+            {
                 id :        'styler',
                 name :      'StylerTM',
                 icon :      { default : 'Thumb_08.png', focus : 'Thumb_08_selected.png'},
@@ -616,8 +615,8 @@ var go_shop_model="";
                         ],
                     },
                 ],
-            },*/
-            /*{//20210129 에어콘 추가
+            },
+            {//20210129 에어콘 추가
                 id :        'aircon',
                 name :      '에어콘',
                 icon :      { default : 'Thumb_10.png', focus : 'Thumb_10_selected.png'},
@@ -650,7 +649,7 @@ var go_shop_model="";
                         ],
                     },
                 ],
-            }*/
+            }
         ],
     };
 

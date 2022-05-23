@@ -125,7 +125,7 @@ if(objSimulator !== 'undefined'){
 
 
 
-// 배경 선택 부 (nature, modern, nordic 타입별로 3개씩 존재하는데 기본, B_, C_ 이름이 포함되어있는 이미지가 업로드 되어있어야함 jh)
+// 배경 선택 부
 $(".btn-style").on("click", function(){
     $(".btn-style").removeClass("active");
     $(this).addClass("active");
@@ -149,7 +149,21 @@ $(".btn-style").on("click", function(){
         let imgW = $(this).find("img").width();
         //let bgUrlFront = "/ru/images/objet/simulator/bg/"; 기존백업
         let bgUrlFront = "images/objet/simulator/bg/";
-        let bgUrl = "bg_"+bgType+"_"+bgT+"0"+(idx+1)+".png"
+
+        let bgUrl;
+
+        if(idx == 1){
+            bgUrl = "bg_"+bgType+"_"+bgT+"04.png";
+        }else if(idx == 2){
+            bgUrl = "bg_"+bgType+"_"+bgT+"02.png";
+        }else if(idx == 3){
+            bgUrl = "bg_"+bgType+"_"+bgT+"03.png";
+        }else{
+            bgUrl = "bg_"+bgType+"_"+bgT+"0"+(idx+1)+".png"
+        }
+
+        console.log(bgUrl);
+
         /*$(this).find("img").after("<img src='"+(bgUrlFront+bgUrl)+"' alt='' />");*/
         $(this).find("img").attr("src",(bgUrlFront+bgUrl));
         /*$(this).find("img:nth-child(1)").css({"width":imgW}).delay(500).animate({"height":0},{
@@ -221,7 +235,6 @@ $(".btn-objet-type").on("click",function(){
     $(this).parent("li").addClass("active");
 });
 
-// jh_색상 선택 팝업내 "?" 아이콘 눌렀을때 정보노출
 function tooltipOpen(e) {
     var thisA = $(e).attr("value");
     console.log("thisA",thisA);
@@ -263,7 +276,7 @@ $("#save").on("click", function(){
     simulator.updateObjetSelected();
     //console.log('$("#refrigerator_convertible_L").val()',$("#refrigerator_convertible_L").val());
     //console.log('$("#refrigerator_convertible_M").val()',$("#refrigerator_convertible_M").val());
-    if($("#refrigerator_convertible_L").val() != "" || $("#refrigerator_convertible_M").val() != "" ||  ($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != "") /*|| ($("#wash_T").val() != "" && $("#wash_B").val() != "") *//*|| $("#clean").val() != ""*/ /*|| $("#styler").val() != "" */){
+    if($("#refrigerator_convertible_L").val() != "" || $("#refrigerator_convertible_M").val() != "" ||  ($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != "") || ($("#wash_T").val() != "" && $("#wash_B").val() != "") /*|| $("#clean").val() != ""*/ || $("#styler").val() != "" ){
         let popCont = '';
         let imgUrl = 'images/objet/simulator/appliances/';
         if($("#refrigerator_convertible_L").val() != ""){//larder
@@ -384,7 +397,7 @@ $("#save").on("click", function(){
             popCont += '</li>';
         }
 
-        /*if($("#wash_T").val() != "" && $("#wash_B").val() != ""){//워시타워
+        if($("#wash_T").val() != "" && $("#wash_B").val() != ""){//워시타워
             let nm = "wash";
             let nmTxt = "wash";
             let colorNmT = $("#wash_T").val();
@@ -401,7 +414,7 @@ $("#save").on("click", function(){
             popCont += '	</div>';
             popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail" data-link-name="move to wash Подробнее"><span>Подробнее</span></a>';
             popCont += '</li>';
-        }*/
+        }
 
         /*if($("#clean").val() != ""){//청소기
             let nm = "clean";
@@ -428,7 +441,7 @@ $("#save").on("click", function(){
             popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail" data-link-name="move to clean Толығырақ"><span>Толығырақ</span></a>';
             popCont += '</li>';
         }*/
-        /*
+
         if($("#styler").val() != ""){//스타일러
             let nm = "styler";
             let nmTxt = "styler";
@@ -451,7 +464,7 @@ $("#save").on("click", function(){
             popCont += '	</div>';
             popCont += '	<a href="'+tarLink+'" target="_blank" class="go_detail" data-link-name="move to styler Подробнее"><span>Подробнее</span></a>';
             popCont += '</li>';
-        }*/
+        }
 
 
         $("#purchase_popup .purchase_list ul").html("").append(popCont);

@@ -696,12 +696,19 @@ $("body").on("click", ".btn_cta", function () {
                     }
                 }
 
+                /* 220523 start */
                 let defaultData = [];
+                defaultData.push("{ data: { sku: " + JSON.stringify(productModelId) + ", qty: 1 }, zipcode: \"2021\" }")
+                /* 220523 end */
                 for (let i = 0; i < cartDataArr_refrigerator.length; i++) {
-                    defaultData.push("{ data: { sku: " + JSON.stringify(cartDataArr_refrigerator[i].data.sku) + ", qty: 1 }, zipcode: \"2000\", lg_custom_options: { objet_sales_options: " + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.objet_sales_options) + ", parent_sku: " + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.parent_sku) + " } }")
+                    defaultData.push("{ data: { sku: " 
+                    + JSON.stringify(cartDataArr_refrigerator[i].data.sku) + ", qty: 1 }, zipcode: \"2000\", lg_custom_options: { objet_sales_options: " 
+                    + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.objet_sales_options) + ", parent_sku: " 
+                    + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.parent_sku) + " } }")
                 }
                 finalData = defaultData;
             }
+
             mutationDataR = JSON.stringify({
                 "query": "mutation { addObjetSalesToCart( input: { cartItems: [ " + finalData + "] }) {redirectUrl cart { items { product { sku } qty } } } }",
                 "variables": null,
@@ -755,7 +762,8 @@ $("body").on("click", ".btn_cta", function () {
                 }
                 cartDataArr_refrigerator_convertible_L.push(cartData);
                 mutationDataL = JSON.stringify({
-                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [{ data :{ sku : " + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].data.sku) + " , qty :1}, zipcode :\"2000\"}] }) {redirectUrl cart { items { product { sku } qty } } } }",
+                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [{ data :{ sku : " 
+                    + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].data.sku) + " , qty :1}, zipcode :\"2000\"}] }) {redirectUrl cart { items { product { sku } qty } } } }",
                     "variables": null,
                     "operationName": null
                 })
@@ -782,15 +790,16 @@ $("body").on("click", ".btn_cta", function () {
                     }
                 }
                 cartDataArr_refrigerator_convertible_L.push(cartData);
-
+                /* 220523 start */
                 mutationDataL = JSON.stringify({
-                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [ { data: { sku: "
+                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [ { data: { sku: " + JSON.stringify(productModelId_L) + ", qty: 1 }, zipcode: \"2021\" }, { data: { sku: "
                         + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].data.sku) + ", qty: 1 }, zipcode: \"2000\" lg_custom_options: { objet_sales_options: "
                         + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].lg_custom_options.objet_sales_options)
                         + " parent_sku:" + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].lg_custom_options.parent_sku) + " } }] }) { redirectUrl cart { items { product { sku } qty } } } }",
                     "variables": null,
                     "operationName": null
                 })
+                /* 220523 end */
             }
 
             if (isEmptyObj(userSelectData_M)) {
@@ -829,15 +838,17 @@ $("body").on("click", ".btn_cta", function () {
                     }
                 }
                 cartDataArr_refrigerator_convertible_M.push(cartData);
-
+                
+                /* 220523 start */
                 mutationDataM = JSON.stringify({
-                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [ { data: { sku: "
+                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [  { data: { sku: " + JSON.stringify(productModelId_M) + ", qty: 1 }, zipcode: \"2021\" }, { data: { sku: "
                         + JSON.stringify(cartDataArr_refrigerator_convertible_M[0].data.sku) + ", qty: 1 }, zipcode: \"2000\" lg_custom_options: { objet_sales_options: "
                         + JSON.stringify(cartDataArr_refrigerator_convertible_M[0].lg_custom_options.objet_sales_options)
                         + " parent_sku:" + JSON.stringify(cartDataArr_refrigerator_convertible_M[0].lg_custom_options.parent_sku) + " } }] }) { redirectUrl cart { items { product { sku } qty } } } }",
                     "variables": null,
                     "operationName": null
                 })
+                /* 220523 end */
             }
         }
     }
