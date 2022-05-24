@@ -1597,7 +1597,7 @@ var userSelectedModelData = [];
 
 					for (var j = 0; j < configData.object[i].selections.length; j++) {
 
-						outputHtml += '<div id="' + configData.object[i].id + '_objet-' + i + j + '" class="objet_base objet_resize"' + // @pck 2020-10-23 오브제 선택 시 화면 센터로 스크롤 fix
+						/* outputHtml += '<div id="' + configData.object[i].id + '_objet-' + i + j + '" class="objet_base objet_resize"' + // @pck 2020-10-23 오브제 선택 시 화면 센터로 스크롤 fix
 							' itemw="' + configData.object[i].selections[j].size.width +
 							'" itemh="' + configData.object[i].selections[j].size.height +
 							'" itemt="' + configData.object[i].selections[j].offset.top +
@@ -1611,7 +1611,29 @@ var userSelectedModelData = [];
 							'id="' + configData.object[i].selections[j].id + '" ' +
 							'alt="' + configData.object[i].selections[j].id + '" /></p>' +
 							'</a>' +
+							'</div>'; */
+
+
+						//@2022-05-18 패널선택유도 아이콘 표시 (s)
+						outputHtml += '<div id="' + configData.object[i].id + '_objet-' + i + j + '" class="objet_base objet_resize"' + // @pck 2020-10-23 오브제 선택 시 화면 센터로 스크롤 fix
+							' itemw="' + configData.object[i].selections[j].size.width +
+							'" itemh="' + configData.object[i].selections[j].size.height +
+							'" itemt="' + configData.object[i].selections[j].offset.top +
+							'" iteml="' + configData.object[i].selections[j].offset.left +
+							'" >';
+						// outputHtml += 	'" style="background-image:url(' + objectImageURL + configData.object[i].selections[j].placeholder + ');">';
+						if (configData.object[i].id == "refrigerator" || configData.object[i].id == "refrigerator_convertible") {
+							outputHtml += '<a href="#none" class="object-app object-anchor" data-object="' + configData.object[i].id + '" data-object-selector="' + configData.object[i].selections[j].id + '">';
+						} else {
+							outputHtml += '<a href="#none" class="object-app" data-object="' + configData.object[i].id + '" data-object-selector="' + configData.object[i].selections[j].id + '">';
+						}
+						// outputHtml += 'style="background-image:url(' + objectImageURL + configData.object[i].selections[j] + ');"';
+						outputHtml += '<p><img src="' + objectImageURL + configData.object[i].selections[j].defaultImage + '" ' +
+							'id="' + configData.object[i].selections[j].id + '" ' +
+							'alt="' + configData.object[i].selections[j].id + '" /></p>' +
+							'</a>' +
 							'</div>';
+						//@2022-05-18 패널선택유도 아이콘 표시 (e)
 					}
 
 					outputHtml += '<label class="objet_resize ' + configData.object[i].id + '" for="' + configData.object[i].id + '-select"' +
@@ -1663,6 +1685,11 @@ var userSelectedModelData = [];
 							_self.selectObject(this.dataset.object, this.dataset.objectSelector);
 						});
 					}
+					//@2022-05-18 패널선택유도 아이콘 표시 (s)
+					$(".object-anchor").on("click", function () {
+						$(this).removeClass("object-anchor");
+					});
+					//@2022-05-18 패널선택유도 아이콘 표시 (e)
 				}
 
 				//셀렉션 클릭 시
@@ -1689,7 +1716,15 @@ var userSelectedModelData = [];
 								selectedObjetCheckbox = document.querySelector('input#' + this.value + '-select') !== null ?
 									document.querySelector('input#' + this.value + '-select') : null;
 
-								if (selectedObjetCheckbox !== null) selectedObjetCheckbox.classList.add('editing');
+
+								//@2022-05-18 패널선택유도 아이콘 표시 (s)
+								if (selectedObjetCheckbox !== null) {
+									selectedObjetCheckbox.classList.add('editing');
+									if ($(".object-anchor").hasClass("active")) {
+										$(".object-anchor.active").removeClass("object-anchor");
+									}
+								}
+								//@2022-05-18 패널선택유도 아이콘 표시 (e)
 
 							} else {
 								simulator.hideRightSideOptions();
@@ -2439,18 +2474,16 @@ var userSelectedModelData = [];
 			// 소재와 컬러 선택 부 (e)
 
 			//@2022-05-18 Glass → 본품 선택시, refresh 버튼 초기화 기능 테스트중 (s)
-			/*$(".btn_refresh").on("click", function(){
-					 // 장바구니 데이터 삭제
-					 for (var i=0; i<userSelectedModelData.length; i++){
-						  if(userSelectedModelData[i].selectedObject_id == "refrigerator") userSelectedModelData.splice(i,1);
-					 }
-					 // 선택값 초기화
-					 simulator.resetSelectedObject('refrigerator','refrigerator_LT');
-					 simulator.resetSelectedObject('refrigerator','refrigerator_LB');
-					 simulator.resetSelectedObject('refrigerator','refrigerator_RB');
-					 // 팝업 숨김
-					 $(".color_warning_popup").closest(".layer_popup").fadeOut();
-				});*/
+			$(".btn_refresh").on("click", function () {
+				// 장바구니 데이터 삭제
+				for (var i = 0; i < userSelectedModelData.length; i++) {
+					if (userSelectedModelData[i].selectedObject_id == "refrigerator") userSelectedModelData.splice(i, 1);
+				}
+				// 선택값 초기화
+				simulator.resetSelectedObject('refrigerator');
+				// 팝업 숨김
+				$(".color_warning_popup").closest(".layer_popup").fadeOut();
+			});
 			//@2022-05-18 Glass → 본품 선택시, refresh 버튼 초기화 기능 테스트중 (e)
 
 			//@2022-05-18 본품컬러 일괄선택 기능추가 (s)
@@ -2463,10 +2496,10 @@ var userSelectedModelData = [];
 				mainColorFun(mainColorSetID);
 			});
 
-			/*$(".btn_modelRestBtn").on("click", function(){
+			/* $(".btn_modelRestBtn").on("click", function(){
 				let mainColorSetID = $(this).data('setting-btn');
 				mainColorFun(mainColorSetID);
-			});*/
+			}); */
 
 			function mainColorFun(btnID) {
 				let selectColor;
@@ -2480,13 +2513,17 @@ var userSelectedModelData = [];
 					// simulator.resetSelectedObject('refrigerator','refrigerator_LT');
 					// simulator.resetSelectedObject('refrigerator','refrigerator_LB');
 					// simulator.resetSelectedObject('refrigerator','refrigerator_RB');
-
+					
 					$("#refrigerator_LT").val("st_green");
 					$("#refrigerator_LB").val("st_silver");
 					$("#refrigerator_RB").val("st_silver");
 					simulator.setObject('refrigerator', 'refrigerator_LT', 'st_green');
 					simulator.setObject('refrigerator', 'refrigerator_LB', 'st_silver');
 					simulator.setObject('refrigerator', 'refrigerator_RB', 'st_silver');
+
+					/* 220524 start */
+					$('a[data-object="refrigerator"]').removeClass("object-anchor");
+					/* 220524 end */
 
 				} else if (btnID === 'convertibleLSetBtn') {
 					simulator.setObject('refrigerator_convertible', 'refrigerator_convertible_L', 'st_silver');

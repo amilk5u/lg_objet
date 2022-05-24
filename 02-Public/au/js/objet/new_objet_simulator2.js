@@ -709,6 +709,7 @@ $("body").on("click", ".btn_cta", function () {
                 finalData = defaultData;
             }
 
+            console.log(finalData)
             mutationDataR = JSON.stringify({
                 "query": "mutation { addObjetSalesToCart( input: { cartItems: [ " + finalData + "] }) {redirectUrl cart { items { product { sku } qty } } } }",
                 "variables": null,
