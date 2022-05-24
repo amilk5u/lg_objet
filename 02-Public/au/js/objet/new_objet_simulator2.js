@@ -701,10 +701,10 @@ $("body").on("click", ".btn_cta", function () {
                 defaultData.push("{ data: { sku: " + JSON.stringify(productModelId) + ", qty: 1 }, zipcode: \"2021\" }")
                 /* 220523 end */
                 for (let i = 0; i < cartDataArr_refrigerator.length; i++) {
-                    defaultData.push("{ data: { sku: " 
-                    + JSON.stringify(cartDataArr_refrigerator[i].data.sku) + ", qty: 1 }, zipcode: \"2000\", lg_custom_options: { objet_sales_options: " 
-                    + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.objet_sales_options) + ", parent_sku: " 
-                    + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.parent_sku) + " } }")
+                    defaultData.push("{ data: { sku: "
+                        + JSON.stringify(cartDataArr_refrigerator[i].data.sku) + ", qty: 1 }, zipcode: \"2000\", lg_custom_options: { objet_sales_options: "
+                        + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.objet_sales_options) + ", parent_sku: "
+                        + JSON.stringify(cartDataArr_refrigerator[i].lg_custom_options.parent_sku) + " } }")
                 }
                 finalData = defaultData;
             }
@@ -762,8 +762,8 @@ $("body").on("click", ".btn_cta", function () {
                 }
                 cartDataArr_refrigerator_convertible_L.push(cartData);
                 mutationDataL = JSON.stringify({
-                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [{ data :{ sku : " 
-                    + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].data.sku) + " , qty :1}, zipcode :\"2000\"}] }) {redirectUrl cart { items { product { sku } qty } } } }",
+                    "query": "mutation { addObjetSalesToCart( input: { cartItems: [{ data :{ sku : "
+                        + JSON.stringify(cartDataArr_refrigerator_convertible_L[0].data.sku) + " , qty :1}, zipcode :\"2000\"}] }) {redirectUrl cart { items { product { sku } qty } } } }",
                     "variables": null,
                     "operationName": null
                 })
@@ -838,7 +838,7 @@ $("body").on("click", ".btn_cta", function () {
                     }
                 }
                 cartDataArr_refrigerator_convertible_M.push(cartData);
-                
+
                 /* 220523 start */
                 mutationDataM = JSON.stringify({
                     "query": "mutation { addObjetSalesToCart( input: { cartItems: [  { data: { sku: " + JSON.stringify(productModelId_M) + ", qty: 1 }, zipcode: \"2021\" }, { data: { sku: "
@@ -916,9 +916,18 @@ $("body").on("click", ".btn_cta", function () {
         })
     }
 
-    // window.location.href='https://wwwstg.lg.com/au/shop/checkout/cart/index';
-    /* 220519 end */
+
+    /* 220524 start */
+    $("#addToCartSuccess").addClass("show"); //장바구니 팝업 생성
+    /* 220524 end */
 });
+
+/* 220524 start */
+// 장바구니 팝업 삭제
+$(".btn-secondary").on("click", function () {
+    $("#addToCartSuccess").removeClass("show");
+});
+/* 220524 end */
 
 
 // 본품컬러 선택화면내에있는 CTA 클릭시
@@ -1121,6 +1130,9 @@ $("body").on("click", ".btn_modelRestBtn", function () {
             }
         })
     }
+    /* 220524 start */
+    $("#addToCartSuccess").addClass("show"); //장바구니 팝업 생성
+    /* 220524 end */
 });
 //@2022-05-18 장바구니 API 연동 (e)
 

@@ -289,6 +289,13 @@
 #purchase_popup .purchase_list ul li .direct_txt{text-align:center;margin-top:10px;color:#666666;font-size:16px;}
 #purchase_popup .purchase_list ul li .go_detail{display:block;width:84%;margin:20px auto 0;border:1px solid #e1e1e1;text-align:center;font-size:16px;line-height:40px;color:#666666;}
 #purchase_popup .purchase_list ul li .go_detail + .go_detail{width:84%;margin:10px auto 0;}
+
+
+/* 220524 start */
+#purchase_popup .purchase_list ul li .btn_cta { display:block; width:90%; margin:20px auto 0; border:1px solid #e1e1e1; text-align:center; font-size:16px; line-height:1.4; color:#666666; padding:10px 0; font-family:"LG Smart","Segoe UI","Microsoft Sans Serif",sans-serif; } 
+/* 220524 end */
+
+
 #purchase_popup .comment_txt{margin-top:35px;text-align:center;font-size:13px;color:#666666;font-weight:300;}
 .inner_contents .objet_popup .pop_inner{width:350px;padding:40px 15px;text-align:center;}
 .inner_contents .objet_popup .pop_inner strong{font-size:20px;color:#222222;font-weight:700;}

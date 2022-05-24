@@ -1,10 +1,8 @@
 
 //console.log("objSimulator"+ objSimulator);
-if(objSimulator !== 'undefined'){
+if (objSimulator !== 'undefined') {
     var simulator = new objSimulator();
     simulator.init();
-
-
 
     //배경 변경 부
     var queryURL = window.location.search;
@@ -12,15 +10,15 @@ if(objSimulator !== 'undefined'){
 
     var bgID = new RegExp('[\?&]bgID=([^&#]*)').exec(window.location.href);
 
-    if(bgID !== null){ //bgID 파라미터 존재 시 바로 시뮬레이터 편집화면 진입
+    if (bgID !== null) { //bgID 파라미터 존재 시 바로 시뮬레이터 편집화면 진입
         bgID = decodeURI(bgID[1]) || 0;
         //console.log(bgID);
-        if( simulator.setBackgrounds(bgID) ){ //배경 로드 이 후로 타이밍 변경
-            document.querySelector('.simulator').classList.add('full','no_ani');
+        if (simulator.setBackgrounds(bgID)) { //배경 로드 이 후로 타이밍 변경
+            document.querySelector('.simulator').classList.add('full', 'no_ani');
             simulator.objSwiperInit(0);
         }
         //$(".simul-start-div, .opacity-mask").hide();
-    }else{
+    } else {
         simulator.setBackgrounds('modern');
         //bgID 없을 시 기본 섹션 선택 화면으로 이동
         var objSwiper = new Swiper('.obj-swiper-container',
@@ -46,26 +44,26 @@ if(objSimulator !== 'undefined'){
                     nextEl: '.obj-swiper-button-next',
                     prevEl: '.obj-swiper-button-prev',
                 },
-                on : {
-                    init : function(){
+                on: {
+                    init: function () {
                         //var activeSlideImgSrc = this.slides[this.activeIndex].querySelector('img').src;
                         // if( activeSlideImgSrc !== null )
                         // 	dummyImgEL.src = activeSlideImgSrc;
                         //this.update();
                     },
-                    slideChangeTransitionEnd : function (swiper){
+                    slideChangeTransitionEnd: function (swiper) {
                         //var activeSlideImgSrc = this.slides[this.activeIndex].querySelector('img').src;
                         // if( activeSlideImgSrc !== null )
                         // 	dummyImgEL.src = activeSlideImgSrc;
                         //this.update();
                     },
-                    click : function(swiper, event) {
+                    click: function (swiper, event) {
 
                         this.update(); //간혹 swiper 내부 세팅값이 반영안되는 케이스가 존재함
                         //console.log(this.activeIndex);
 
                         var clickedEl = this.clickedSlide;
-                        if(clickedEl.classList.contains('swiper-slide-active')) {
+                        if (clickedEl.classList.contains('swiper-slide-active')) {
                             document.querySelector('.simulator').classList.add('full');
                             var selectedIndex = this.realIndex;
                             //dummyImgEL.classList.add('active');
@@ -73,7 +71,7 @@ if(objSimulator !== 'undefined'){
 
                             var selectedSlideIndex = selectedIndex;
                             simulator.objSwiperInit(selectedSlideIndex);
-                        }else{
+                        } else {
                             this.slideToClickedSlide();
                         }
                     },
@@ -83,8 +81,8 @@ if(objSimulator !== 'undefined'){
 
         objSwiper.destroy();
 
-        $(".simulator_area .swiper-slide").on("click", function(){
-            if ( $(".simulator").hasClass("full") ) {
+        $(".simulator_area .swiper-slide").on("click", function () {
+            if ($(".simulator").hasClass("full")) {
 
             } else {
                 $(this).addClass("swiper-slide-active");
@@ -92,11 +90,11 @@ if(objSimulator !== 'undefined'){
                 $(".swiper-slide").removeClass("divpn");
                 objSwiper.update(); //간혹 swiper 내부 세팅값이 반영안되는 케이스가 존재함
 
-                if( $(".simulator_area .swiper-slide").hasClass('swiper-slide-active') ) {
+                if ($(".simulator_area .swiper-slide").hasClass('swiper-slide-active')) {
                     var index = $(this).index();
                     document.querySelector('.simulator').classList.add('full');
                     simulator.objSwiperInit(index);
-                }else{
+                } else {
                     this.slideToClickedSlide();
                 }
                 /*if (guide_yn!="N")
@@ -120,27 +118,22 @@ if(objSimulator !== 'undefined'){
 }
 
 
-
-
-
-
-
-// 배경 선택 부
-$(".btn-style").on("click", function(){
+// 배경 선택 부 (nature, modern, nordic 타입별로 3개씩 존재하는데 기본, B_, C_ 이름이 포함되어있는 이미지가 업로드 되어있어야함 jh)
+$(".btn-style").on("click", function () {
     $(".btn-style").removeClass("active");
     $(this).addClass("active");
-    if(simulator){
+    if (simulator) {
         //simulator.setBackgrounds(this.dataset.id); //배경 modern, nature, nordic 중 택일
     }
     let bgType = $(this).closest("li").attr("data-bgType");
     let bgIdx = $(this).index();
-    $("#objet_select_slider .swiper-slide").each(function(idx){
+    $("#objet_select_slider .swiper-slide").each(function (idx) {
         let bgT = "";
-        if(bgIdx == 0){
+        if (bgIdx == 0) {
             bgT = "";
-        }else if(bgIdx == 1){
+        } else if (bgIdx == 1) {
             bgT = "B_";
-        }else if(bgIdx == 2){
+        } else if (bgIdx == 2) {
             bgT = "C_";
         }
         /*if(idx >= 1){
@@ -149,23 +142,9 @@ $(".btn-style").on("click", function(){
         let imgW = $(this).find("img").width();
         //let bgUrlFront = "/ru/images/objet/simulator/bg/"; 기존백업
         let bgUrlFront = "images/objet/simulator/bg/";
-
-        let bgUrl;
-
-        if(idx == 1){
-            bgUrl = "bg_"+bgType+"_"+bgT+"04.png";
-        }else if(idx == 2){
-            bgUrl = "bg_"+bgType+"_"+bgT+"02.png";
-        }else if(idx == 3){
-            bgUrl = "bg_"+bgType+"_"+bgT+"03.png";
-        }else{
-            bgUrl = "bg_"+bgType+"_"+bgT+"0"+(idx+1)+".png"
-        }
-
-        console.log(bgUrl);
-
+        let bgUrl = "bg_" + bgType + "_" + bgT + "0" + (idx + 1) + ".png"
         /*$(this).find("img").after("<img src='"+(bgUrlFront+bgUrl)+"' alt='' />");*/
-        $(this).find("img").attr("src",(bgUrlFront+bgUrl));
+        $(this).find("img").attr("src", (bgUrlFront + bgUrl));
         /*$(this).find("img:nth-child(1)").css({"width":imgW}).delay(500).animate({"height":0},{
             duration:500,
             complete:function(){
@@ -178,20 +157,20 @@ $(".btn-style").on("click", function(){
 });
 
 //인기 조합 선택 부
-$(".btn-favo").on("click", function(){
+$(".btn-favo").on("click", function () {
     $(".btn-favo").removeClass("active");
     $(this).addClass("active");
 
-    if(simulator){
+    if (simulator) {
         //simulator.setBackground(this.dataset.id); //배경 modern, nature, nordic 중 택일
     }
 });
 
 //기기 선택 부
-$(".lg-appliances input[type=checkbox]").on("click", function() {
-    if(this.checked){
-        if(this.value == "refrigerator_convertible"){ $('.rf-con').show(); } //컨버터블 냉장고일 때 툴팁 노출
-        else{ $('.rf-con').hide(); }
+$(".lg-appliances input[type=checkbox]").on("click", function () {
+    if (this.checked) {
+        if (this.value == "refrigerator_convertible") { $('.rf-con').show(); } //컨버터블 냉장고일 때 툴팁 노출
+        else { $('.rf-con').hide(); }
 
         simulator.selectObject(this.value, null);
 
@@ -199,62 +178,63 @@ $(".lg-appliances input[type=checkbox]").on("click", function() {
         var colorWarningPopup = document.querySelector('.color_warning_popup') !== null ?
             document.querySelector('.color_warning_popup') : false;
 
-        if(colorWarningPopup.classList.contains('actived')) colorWarningPopup.classList.remove('actived');
+        if (colorWarningPopup.classList.contains('actived')) colorWarningPopup.classList.remove('actived');
 
         //기기 변경 시 마다 컬러 선택 알림 초기화
         var selectedObjetCheckbox = document.querySelector('.editing');
-        if(selectedObjetCheckbox !== null) selectedObjetCheckbox.classList.remove('editing');
+        if (selectedObjetCheckbox !== null) selectedObjetCheckbox.classList.remove('editing');
 
-        selectedObjetCheckbox = document.querySelector('input#'+ this.value + '-select') !== null ?
-            document.querySelector('input#'+ this.value + '-select') : null;
+        selectedObjetCheckbox = document.querySelector('input#' + this.value + '-select') !== null ?
+            document.querySelector('input#' + this.value + '-select') : null;
 
-        if(selectedObjetCheckbox !== null) selectedObjetCheckbox.classList.add('editing');
+        if (selectedObjetCheckbox !== null) selectedObjetCheckbox.classList.add('editing');
 
-    }else{
+    } else {
         simulator.hideRightSideOptions();
     }
 });
 
 //기기 직접 선택 부
-$(".object-app").on("click", function(){
+$(".object-app").on("click", function () {
     $(".object-app").removeClass("active");
     $(this).addClass("active");
     //this.slides[navindex].classList.add('active-background');
 });
 
 //우측 사이드 바 닫기
-$(".select_objet .btn-close").on("click", function(){
+$(".select_objet .btn-close").on("click", function () {
     //$(".img-download").fadeIn();
     simulator.hideRightSideOptions();
 });
 
 //우측 사이드바 오브제 타입 선택
-$(".btn-objet-type").on("click",function(){
+$(".btn-objet-type").on("click", function () {
     simulator.updateSideBar();
     $(".select_objet > ul > li").removeClass("active");
     $(this).parent("li").addClass("active");
 });
 
+// jh_색상 선택 팝업내 "?" 아이콘 눌렀을때 정보노출
 function tooltipOpen(e) {
     var thisA = $(e).attr("value");
-    console.log("thisA",thisA);
-    if ( thisA == "FENIX" ) {
+    console.log("thisA", thisA);
+    if (thisA == "FENIX") {
         var title = "FENIX";
         var ptext = "감각적인 디자인을 완성하는 프리미엄 신소재로 손 끝은 스치는 부드러움과 스스로 재생되는 신비로움을 경험할 수 있습니다.";
         var img = "<img src='images/objet/img-fenix.jpg' />";
-    } else if ( thisA == "<span class='lang_kz'>Тыныштандыратын</span><span class='lang_ru'>Успокаивающий</span>" ) {
+    } else if (thisA == "<span class='lang_kz'>Тыныштандыратын</span><span class='lang_ru'>Успокаивающий</span>") {
         var title = "<span class='lang_kz'>Тыныштандыратын</span><span class='lang_ru'>Успокаивающий</span>";
         var ptext = "<span class='lang_kz'>Ол берік және жеңіл, бірегей мөлдірлігі мен тартымды әрлеуімен ерекшеленеді, ыңғайлы, жайлы және тыныштандыратын кеңістік жасайды.</span><span class='lang_ru'>Она прочна и легка, отличается уникальной прозрачностью и привлекательной отделкой, создавая уютное, комфортное и умиротворяющее пространство.</span>";
         var img = "<img src='images/objet/img-Calming.jpg' />";
-    }else if ( thisA == "<span class='lang_kz'>Тұтас металл</span><span class='lang_ru'>Цельнометаллический</span>" ) {
+    } else if (thisA == "<span class='lang_kz'>Тұтас металл</span><span class='lang_ru'>Цельнометаллический</span>") {
         var title = "<span class='lang_kz'>Тұтас металл</span><span class='lang_ru'>Цельнометаллический</span>";
         var ptext = "<span class='lang_kz'>Тот баспайтын болаттан жасалған күңгірт және металдың табиғи талғампаздығын баса көрсететін үйлесімді күңгірт қабат кеңістікті заманауи және әдемі етеді.</span><span class='lang_ru'>Матовая нержавеющая сталь и гармоничное матовое покрытие, подчеркивающее естественную изысканность металла, делает пространство современным и красивым.</span>";
         var img = "<img src='images/objet/img-Solid.jpg' />";
-    }else if ( thisA == "<span class='lang_kz'>Сұрғылт шыны</span><span class='lang_ru'>Дымчатое стекло</span>" ) {
+    } else if (thisA == "<span class='lang_kz'>Сұрғылт шыны</span><span class='lang_ru'>Дымчатое стекло</span>") {
         var title = "<span class='lang_kz'>Сұрғылт шыны</span><span class='lang_ru'>Дымчатое стекло</span>";
         var ptext = "<span class='lang_kz'>Күңгірт шыны, сипап көруге жағымды және кез-келген интерьерге өте жақсы сәйкес келеді </span><span class='lang_ru'>Матовое стекло, приятное на ощупь и отлично подходящее для любого интерьера</span>";
         var img = "<img src='images/objet/img-Mist.jpg' />";
-    }else if ( thisA == "<span class='lang_kz'>Өңделмеген металл</span><span class='lang_ru'>Необработанный металл</span>" ) {
+    } else if (thisA == "<span class='lang_kz'>Өңделмеген металл</span><span class='lang_ru'>Необработанный металл</span>") {
         var title = "<span class='lang_kz'>Өңделмеген металл</span><span class='lang_ru'>Необработанный металл</span>";
         var ptext = "<span class='lang_kz'>Бұл кеңістікке қарамастан тыныштық пен елеңсіздік сезімін тудыратын табиғи бітімі бар металл материал</span><span class='lang_ru'>Это металлический материал с природной текстурой, который создает чувство спокойствия и безмятежности вне зависимости от пространства.</span>";
         var img = "<img src='images/objet/img-Nature.jpg' />";
@@ -267,49 +247,47 @@ function tooltipOpen(e) {
 
 }
 
-$(".layer_popup .btn-close").on("click", function(){
+$(".layer_popup .btn-close").on("click", function () {
     $(".layer_popup, .mask").fadeOut();
 });
 
-$("#save").on("click", function(){
+$("#save").on("click", function () {
 
     simulator.updateObjetSelected();
-    //console.log('$("#refrigerator_convertible_L").val()',$("#refrigerator_convertible_L").val());
-    //console.log('$("#refrigerator_convertible_M").val()',$("#refrigerator_convertible_M").val());
-    if($("#refrigerator_convertible_L").val() != "" || $("#refrigerator_convertible_M").val() != "" ||  ($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != "") || ($("#wash_T").val() != "" && $("#wash_B").val() != "") /*|| $("#clean").val() != ""*/ || $("#styler").val() != "" ){
+    if ( ( $("#refrigerator_bottomFreezer_T").val() != "" && $("#refrigerator_bottomFreezer_M").val() != "" ) || $("#refrigerator_convertible_L").val() != "" || $("#refrigerator_convertible_M").val() != "" || ($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != "")  /*|| ($("#wash_T").val() != "" && $("#wash_B").val() != "") *//*|| $("#clean").val() != ""*/ /*|| $("#styler").val() != "" */) {
         let popCont = '';
         let imgUrl = 'images/objet/simulator/appliances/';
-        if($("#refrigerator_convertible_L").val() != ""){//larder
+        if ($("#refrigerator_convertible_L").val() != "") {//larder
             let nm = "rf_con";
             let nmTxt = "холодильник";
             let colorNm = $("#refrigerator_convertible_L").val();
-            let mixNm = imgUrl+nm+"/ico/"+nm+"_"+colorNm+".png";
+            let mixNm = imgUrl + nm + "/ico/" + nm + "_" + colorNm + ".png";
             let tarLinkA = '';
             let tarLinkF = '';
             let arLink = '';
             let target = 'target="_blank"';
-            if(colorNm == "mg_pink"){
+            if (colorNm == "mg_pink") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fepm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gps';
-            }else if(colorNm == "mg_mint"){
+            } else if (colorNm == "mg_mint") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fepm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gms';
-            }else if(colorNm == "mg_silver"){
+            } else if (colorNm == "mg_silver") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fapm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gss';
-            }else if(colorNm == "mg_beige"){
+            } else if (colorNm == "mg_beige") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fepm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gb';
-            }else if(colorNm == "st_silver"){
+            } else if (colorNm == "st_silver") {
                 tarLinkA = "javascript:noSale();";
                 tarLinkF = "javascript:noSale();";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/sss';
                 target = '';
-            }else {
+            } else {
                 tarLinkA = "javascript:noSale();";
                 tarLinkF = "javascript:noSale();";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/sss';
@@ -318,46 +296,46 @@ $("#save").on("click", function(){
             popCont += '';
             popCont += '<li>';
             popCont += '	<div class="pic_box">';
-            popCont += '		<a href="'+arLink+'" target="_blank" class="go_ar" data-link-name="move to тоңазытқыш ar"></a>';
-            popCont += '		<img src="'+mixNm+'" alt="тоңазытқыш" />';
+            popCont += '		<a href="' + arLink + '" target="_blank" class="go_ar" data-link-name="move to тоңазытқыш ar"></a>';
+            popCont += '		<img src="' + mixNm + '" alt="тоңазытқыш" />';
             //popCont += '		<span class="nm">'+nmTxt+'</span>';
             popCont += '	</div>';
             popCont += '	<p class="direct_txt">Толығырақ</p>';
-            popCont += '	<a href="'+tarLinkA+'" '+target+' class="go_detail" data-link-name="move to тоңазытқыш Толығырақ"><span class="lang_kz">тоңазытқыш</span><span class="lang_ru">холодильник</span></a>';
-            popCont += '	<a href="'+tarLinkF+'" '+target+' class="go_detail" data-link-name="move to мұздатқыш Толығырақ"><span class="lang_kz">мұздатқыш</span><span class="lang_ru">морозильник</span></a>';
+            popCont += '	<a href="' + tarLinkA + '" ' + target + ' class="go_detail" data-link-name="move to тоңазытқыш Толығырақ"><span class="lang_kz">тоңазытқыш</span><span class="lang_ru">холодильник</span></a>';
+            popCont += '	<a href="' + tarLinkF + '" ' + target + ' class="go_detail" data-link-name="move to мұздатқыш Толығырақ"><span class="lang_kz">мұздатқыш</span><span class="lang_ru">морозильник</span></a>';
             popCont += '</li>';
         }
-        if($("#refrigerator_convertible_M").val() != ""){//freezer
+        if ($("#refrigerator_convertible_M").val() != "") {//freezer
             let nm = "rf_con";
             let nmTxt = "морозильник";
             let colorNm = $("#refrigerator_convertible_M").val();
-            let mixNm = imgUrl+nm+"/ico/"+nm+"_"+colorNm+".png";
+            let mixNm = imgUrl + nm + "/ico/" + nm + "_" + colorNm + ".png";
             let tarLinkA = '';
             let tarLinkF = '';
             let arLink = '';
             let target = 'target="_blank"';
-            if(colorNm == "mg_pink"){
+            if (colorNm == "mg_pink") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fepm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gps';
-            }else if(colorNm == "mg_mint"){
+            } else if (colorNm == "mg_mint") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fepm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gms';
-            }else if(colorNm == "mg_silver"){
+            } else if (colorNm == "mg_silver") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fapm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gss';
-            }else if(colorNm == "mg_beige"){
+            } else if (colorNm == "mg_beige") {
                 tarLinkA = "https://www.lg.com/kz/refrigerators/lg-gc-b401fepm";
                 tarLinkF = "https://www.lg.com/kz/refrigerators/lg-gc-b404faqm";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/gb';
-            }else if(colorNm == "st_silver"){
+            } else if (colorNm == "st_silver") {
                 tarLinkA = "javascript:noSale();";
                 tarLinkF = "javascript:noSale();";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/sss';
                 target = '';
-            }else {
+            } else {
                 tarLinkA = "javascript:noSale();";
                 tarLinkF = "javascript:noSale();";
                 arLink = 'https://lgarexperience.com/ha/objet/onedoor/sss';
@@ -366,23 +344,23 @@ $("#save").on("click", function(){
             popCont += '';
             popCont += '<li>';
             popCont += '	<div class="pic_box">';
-            popCont += '		<a href="'+arLink+'" target="_blank" class="go_ar" data-link-name="move to мұздатқыш ar"></a>';
-            popCont += '		<img src="'+mixNm+'" alt="мұздатқыш" />';
+            popCont += '		<a href="' + arLink + '" target="_blank" class="go_ar" data-link-name="move to мұздатқыш ar"></a>';
+            popCont += '		<img src="' + mixNm + '" alt="мұздатқыш" />';
             //popCont += '		<span class="nm">'+nmTxt+'</span>';
             popCont += '	</div>';
             popCont += '	<p class="direct_txt">Толығырақ</p>';
-            popCont += '	<a href="'+tarLinkA+'" '+target+' class="go_detail" data-link-name="move to тоңазытқыш Толығырақ"><span>тоңазытқыш</span></a>';
-            popCont += '	<a href="'+tarLinkF+'" '+target+' class="go_detail" data-link-name="move to мұздатқыш Толығырақ"><span>мұздатқыш</span></a>';
+            popCont += '	<a href="' + tarLinkA + '" ' + target + ' class="go_detail" data-link-name="move to тоңазытқыш Толығырақ"><span>тоңазытқыш</span></a>';
+            popCont += '	<a href="' + tarLinkF + '" ' + target + ' class="go_detail" data-link-name="move to мұздатқыш Толығырақ"><span>мұздатқыш</span></a>';
             popCont += '</li>';
         }
 
-        if($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != ""){//상냉장고
+        if ($("#refrigerator_LT").val() != "" && $("#refrigerator_LB").val() != "" && $("#refrigerator_RB").val() != "") {//상냉장고
             let nm = "rf";
             let nmTxt = "Next6";
             let colorNmLT = $("#refrigerator_LT").val();
             let colorNmLB = $("#refrigerator_LB").val();
             let colorNmRB = $("#refrigerator_RB").val();
-            let mixNm = imgUrl+nm+"/ico/rf_default.png";
+            let mixNm = imgUrl + nm + "/ico/rf_default.png";
             let tarLink = 'https://www.lg.com/kz/refrigerators/lg-gr-x24fqekm';
             let arLink = 'https://lgarexperience.com/ha/objet/M870/gb';
             //let target = '';
@@ -390,14 +368,39 @@ $("#save").on("click", function(){
             popCont += '';
             popCont += '<li>';
             popCont += '	<div class="pic_box">';
-            popCont += '		<a href="'+arLink+'" target="_blank" class="go_ar" data-link-name="move to Next6 ar"></a>';
-            popCont += '		<img src="'+mixNm+'" alt="" class="rf_default" />';
+            popCont += '		<a href="' + arLink + '" target="_blank" class="go_ar" data-link-name="move to Next6 ar"></a>';
+            popCont += '		<img src="' + mixNm + '" alt="" class="rf_default" />';
             popCont += '	</div>';
-            popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail" data-link-name="move to Next6 Толығырақ"><span>Толығырақ</span></a>';
+            popCont += '	<a href="' + tarLink + '" ' + target + ' class="go_detail" data-link-name="move to Next6 Толығырақ"><span>Толығырақ</span></a>';
             popCont += '</li>';
         }
 
-        if($("#wash_T").val() != "" && $("#wash_B").val() != ""){//워시타워
+
+        /* 220524 start */
+        if ($("#refrigerator_bottomFreezer_T").val() != "" && $("#refrigerator_bottomFreezer_M").val() != "" ) {//refrigerator_bottomFreezer
+            let nm = "rf_bf";
+            // let colorNmT = $("#refrigerator_bottomFreezer_T").val();
+            // let colorNmM = $("#refrigerator_bottomFreezer_M").val();
+            let tarLink = '';
+            let arLink = '#'; // AR 링크 추가해야함
+            let target = 'target="_blank"';
+            let mixNm = imgUrl+nm+"/ico/wash_default.png";
+            // let userSelectImg = imgUrl + nm + "/ico/rf_bf_" + colorNmT + "_" + colorNmM + ".png";
+
+            popCont += '';
+            popCont += '<li>';
+            popCont += '	<div class="pic_box">';
+            popCont += '		<a href="' + arLink + '" target="_blank" class="go_ar" data-link-name="move to Bottom Freezer ar"></a>';
+            popCont += '		<img src="'+mixNm+'" alt="" class="rf_userSelectImage" />';
+            // popCont += '		<img src="' + userSelectImg + '" alt="" class="rf_userSelectImage" />';
+            popCont += '	</div>';
+            popCont += '	<a href="' + tarLink + '" ' + target + ' class="go_detail" data-link-name="move to тоңазытқыш Толығырақ"><span>тоңазытқыш</span></a>';
+            popCont += '	<a href="" target="_blank" class="go_detail" data-link-name="move to wash Подробнее"><span>Подробнее</span></a>';
+            popCont += '</li>';
+        }
+        /* 220524 end */
+
+        /*if($("#wash_T").val() != "" && $("#wash_B").val() != ""){//워시타워
             let nm = "wash";
             let nmTxt = "wash";
             let colorNmT = $("#wash_T").val();
@@ -414,7 +417,7 @@ $("#save").on("click", function(){
             popCont += '	</div>';
             popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail" data-link-name="move to wash Подробнее"><span>Подробнее</span></a>';
             popCont += '</li>';
-        }
+        }*/
 
         /*if($("#clean").val() != ""){//청소기
             let nm = "clean";
@@ -441,7 +444,7 @@ $("#save").on("click", function(){
             popCont += '	<a href="'+tarLink+'" '+target+' class="go_detail" data-link-name="move to clean Толығырақ"><span>Толығырақ</span></a>';
             popCont += '</li>';
         }*/
-
+        /*
         if($("#styler").val() != ""){//스타일러
             let nm = "styler";
             let nmTxt = "styler";
@@ -464,15 +467,14 @@ $("#save").on("click", function(){
             popCont += '	</div>';
             popCont += '	<a href="'+tarLink+'" target="_blank" class="go_detail" data-link-name="move to styler Подробнее"><span>Подробнее</span></a>';
             popCont += '</li>';
-        }
-
+        }*/
 
         $("#purchase_popup .purchase_list ul").html("").append(popCont);
         $("#purchase_popup").fadeIn();
 
 
 
-    }else{
+    } else {
         $("#empty_popup").fadeIn();
     }
 
@@ -559,803 +561,792 @@ $("#save").on("click", function(){
 });
 
 //색상 경고 팝업 @pck 2020-10-19
-$(".color_warning_popup button").on("click", function (){
-    if( $(this).hasClass('btn-cancel') ){
+$(".color_warning_popup button").on("click", function () {
+    if ($(this).hasClass('btn-cancel')) {
         $(".color_warning_popup").hide();
     }
-    if( $(this).hasClass('btn-confirm-select') ){
+    if ($(this).hasClass('btn-confirm-select')) {
         simulator.confirmColorSelect($(".btn-objet.pre-active"));
         $(".color_warning_popup").hide();
     }
 });
 
 //소재 다른 제품 구매 안내 팝업
-function showShopLinkAlert(){
+function showShopLinkAlert() {
     $(".shop_reservation_popup").fadeIn();
 
-    $(".shop_reservation_popup button").on("click", function (){
+    $(".shop_reservation_popup button").on("click", function () {
         $(".shop_reservation_popup").fadeOut();
     });
 }
 
 //냉장고 용량 선택
-function showShopLinkAlert(){
+function showShopLinkAlert() {
     $(".shop_reservation_popup").fadeIn();
 
-    $(".shop_reservation_popup button").on("click", function (){
+    $(".shop_reservation_popup button").on("click", function () {
         $(".shop_reservation_popup").fadeOut();
     });
 }
 
 //냉장고 용량 선택
-function showSelectVolume(){
+function showSelectVolume() {
     $(".refrigerator_reservation_popup").fadeIn();
 
-    $(".refrigerator_reservation_popup button").on("click", function (){
+    $(".refrigerator_reservation_popup button").on("click", function () {
         $(".refrigerator_reservation_popup").fadeOut();
     });
 }
 
-$(".opacity-mask, .btn-simul-start-close").click(function(){
+$(".opacity-mask, .btn-simul-start-close").click(function () {
     $(".simul-start-div, .opacity-mask").fadeOut();
 });
 
-$(".btn-simul-start-close2").click(function(){
+$(".btn-simul-start-close2").click(function () {
     $(".control-bx").fadeOut();
 });
 
 //툴팁 선택 시 hide
-$(".simul-info.rf-con").on('click', function (){
+$(".simul-info.rf-con").on('click', function () {
     $(this).hide();
 });
 
 Scrollbar.initAll(); //팝업 내 스크롤바 생성
-function go_shop(tp){
+function go_shop(tp) {
     $(".refrigerator_reservation_popup, .mask").fadeOut();
     var refrigerator_model = "0";
-    if (tp=="1")
-    {
-        if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_stone"){
+    if (tp == "1") {
+        if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6323990";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6322578";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6323991";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6323992";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6334835";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6323993";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6323994";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6323995";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6323997";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6323998";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6323999";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324000";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6335023";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324009";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324008";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324007";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324006";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324005";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324004";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324003";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324002";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324001";
         }
 
-        if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_green"){
+        if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324031";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324030";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324029";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324028";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324027";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324026";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324025";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324024";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324023";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324022";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324021";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324020";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324019";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324018";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324017";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324016";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324015";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324014";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324013";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324012";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324011";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324010";
         }
 
-        if ($("#refrigerator_LT").val()=="nm_gray" && $("#refrigerator_LB").val()=="nm_gray" && $("#refrigerator_RB").val()=="nm_gray"){
+        if ($("#refrigerator_LT").val() == "nm_gray" && $("#refrigerator_LB").val() == "nm_gray" && $("#refrigerator_RB").val() == "nm_gray") {
             refrigerator_model = "6334836";
         }
 
 
-        if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324103";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324102";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324101";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324100";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324099";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324098";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324097";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324096";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324095";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324094";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324093";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324092";
         }
 
-        if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_mint"){
+        if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324091";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324090";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324089";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324088";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324087";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324086";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324085";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324084";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324083";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324082";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324081";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324080";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324079";
         }
 
 
-        if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324078";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324077";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324076";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6334838";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324075";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324074";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324073";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324072";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324071";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324070";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324069";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324068";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324067";
         }
 
-        if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324066";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324065";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324064";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324063";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324062";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324061";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324060";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324059";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324058";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324057";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324056";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324055";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6334837";
         }
-    }else{
-        if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_stone"){
+    } else {
+        if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324539";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324540";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324541";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324542";
-        }else if ($("#refrigerator_LT").val()=="fn_botanic" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_botanic" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324543";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324544";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324545";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324546";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324547";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324548";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324549";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324550";
-        }else if ($("#refrigerator_LT").val()=="fn_sand" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_sand" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324551";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324552";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324553";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_botanic" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_botanic" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324554";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324555";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_sand" && $("#refrigerator_RB").val()=="fn_stone"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_sand" && $("#refrigerator_RB").val() == "fn_stone") {
             refrigerator_model = "6324556";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_botanic"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_botanic") {
             refrigerator_model = "6324557";
-        }else if ($("#refrigerator_LT").val()=="fn_stone" && $("#refrigerator_LB").val()=="fn_stone" && $("#refrigerator_RB").val()=="fn_sand"){
+        } else if ($("#refrigerator_LT").val() == "fn_stone" && $("#refrigerator_LB").val() == "fn_stone" && $("#refrigerator_RB").val() == "fn_sand") {
             refrigerator_model = "6324558";
         }
 
-        if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_green"){
+        if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324580";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324579";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324578";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324577";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324576";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324575";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324574";
-        }else if ($("#refrigerator_LT").val()=="st_black" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_black" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324573";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324572";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324571";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324570";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324569";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324568";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324567";
-        }else if ($("#refrigerator_LT").val()=="st_green" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_green" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324566";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324565";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324564";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_black" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_black" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324563";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324562";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_green" && $("#refrigerator_RB").val()=="st_silver"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_green" && $("#refrigerator_RB").val() == "st_silver") {
             refrigerator_model = "6324561";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_black"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_black") {
             refrigerator_model = "6324560";
-        }else if ($("#refrigerator_LT").val()=="st_silver" && $("#refrigerator_LB").val()=="st_silver" && $("#refrigerator_RB").val()=="st_green"){
+        } else if ($("#refrigerator_LT").val() == "st_silver" && $("#refrigerator_LB").val() == "st_silver" && $("#refrigerator_RB").val() == "st_green") {
             refrigerator_model = "6324559";
         }
 
 
-        if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324652";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324651";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324650";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324649";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324648";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324647";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324646";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324645";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324644";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324643";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324642";
-        }else if ($("#refrigerator_LT").val()=="mg_mint" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_mint" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324641";
         }
-        if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_mint"){
+        if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324640";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324639";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324638";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324637";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324636";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324635";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324634";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324633";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324632";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324631";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324630";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324629";
-        }else if ($("#refrigerator_LT").val()=="mg_pink" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_pink" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324628";
         }
 
-        if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324627";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324626";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324625";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324624";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324623";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324622";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324621";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324620";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324619";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324618";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324617";
-        }else if ($("#refrigerator_LT").val()=="mg_silver" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_silver" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324616";
         }
 
-        if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_pink"){
+        if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324615";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324614";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_mint" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_mint" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324613";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324612";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324611";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_pink" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_pink" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324610";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324609";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324608";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_silver" && $("#refrigerator_RB").val()=="mg_beige"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_silver" && $("#refrigerator_RB").val() == "mg_beige") {
             refrigerator_model = "6324607";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_mint"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_mint") {
             refrigerator_model = "6324606";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_pink"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_pink") {
             refrigerator_model = "6324605";
-        }else if ($("#refrigerator_LT").val()=="mg_beige" && $("#refrigerator_LB").val()=="mg_beige" && $("#refrigerator_RB").val()=="mg_silver"){
+        } else if ($("#refrigerator_LT").val() == "mg_beige" && $("#refrigerator_LB").val() == "mg_beige" && $("#refrigerator_RB").val() == "mg_silver") {
             refrigerator_model = "6324604";
         }
     }
-    if (refrigerator_model=="0")
-    {
+    if (refrigerator_model == "0") {
         showShopLinkAlert();
-    }else{
-        var urlencode = encodeURIComponent("BestMall/Shop/Item/?key="+refrigerator_model);
-        window.open("https://m.lgbestshopmall.co.kr/lgeobs/OpenLink/1683/?redirectUrl="+urlencode,"_blank");
+    } else {
+        var urlencode = encodeURIComponent("BestMall/Shop/Item/?key=" + refrigerator_model);
+        window.open("https://m.lgbestshopmall.co.kr/lgeobs/OpenLink/1683/?redirectUrl=" + urlencode, "_blank");
         $(".layer_popup, .mask").fadeOut();
     }
 }
 
-function goshop(ord){
+function goshop(ord) {
     var refrigerator_model = "0";
-    if (ord=="1")
-    {
+    if (ord == "1") {
 
-        if ($("#refrigerator_T").val()=="fn_botanic" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_stone"){
+        if ($("#refrigerator_T").val() == "fn_botanic" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324421";
-        }else if ($("#refrigerator_T").val()=="fn_botanic" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_sand"){
+        } else if ($("#refrigerator_T").val() == "fn_botanic" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_sand") {
             refrigerator_model = "6324420";
-        }else if ($("#refrigerator_T").val()=="fn_botanic" && $("#refrigerator_M").val()=="fn_sand" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_botanic" && $("#refrigerator_M").val() == "fn_sand" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324422";
-        }else if ($("#refrigerator_T").val()=="fn_botanic" && $("#refrigerator_M").val()=="fn_sand" && $("#refrigerator_B").val()=="fn_stone"){
+        } else if ($("#refrigerator_T").val() == "fn_botanic" && $("#refrigerator_M").val() == "fn_sand" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324423";
-        }else if ($("#refrigerator_T").val()=="fn_botanic" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_botanic" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324424";
-        }else if ($("#refrigerator_T").val()=="fn_botanic" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_sand"){
+        } else if ($("#refrigerator_T").val() == "fn_botanic" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_sand") {
             refrigerator_model = "6324425";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324426";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_sand"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_sand") {
             refrigerator_model = "6324427";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_stone"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324428";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_sand" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_sand" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324429";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_sand" && $("#refrigerator_B").val()=="fn_stone"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_sand" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324430";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324431";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_sand"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_sand") {
             refrigerator_model = "6324440";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324439";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_sand" && $("#refrigerator_B").val()=="fn_stone"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_sand" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324438";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_sand" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_sand" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324437";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_stone"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324436";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_sand"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_sand") {
             refrigerator_model = "6324435";
-        }else if ($("#refrigerator_T").val()=="fn_stone" && $("#refrigerator_M").val()=="fn_botanic" && $("#refrigerator_B").val()=="fn_botanic"){
+        } else if ($("#refrigerator_T").val() == "fn_stone" && $("#refrigerator_M").val() == "fn_botanic" && $("#refrigerator_B").val() == "fn_botanic") {
             refrigerator_model = "6324434";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_stone"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_stone") {
             refrigerator_model = "6324433";
-        }else if ($("#refrigerator_T").val()=="fn_sand" && $("#refrigerator_M").val()=="fn_stone" && $("#refrigerator_B").val()=="fn_sand"){
+        } else if ($("#refrigerator_T").val() == "fn_sand" && $("#refrigerator_M").val() == "fn_stone" && $("#refrigerator_B").val() == "fn_sand") {
             refrigerator_model = "6324432";
         }
 
-        if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_green"){
+        if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324461";
-        }else if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_silver"){
+        } else if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_silver") {
             refrigerator_model = "6324460";
-        }else if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324459";
-        }else if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_green"){
+        } else if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324458";
-        }else if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_silver"){
+        } else if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_silver") {
             refrigerator_model = "6324457";
-        }else if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_silver" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324456";
-        }else if ($("#refrigerator_T").val()=="st_black" && $("#refrigerator_M").val()=="st_silver" && $("#refrigerator_B").val()=="st_green"){
+        } else if ($("#refrigerator_T").val() == "st_black" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324455";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324454";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_green"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324453";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_silver"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_silver") {
             refrigerator_model = "6324452";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324451";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_silver"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_silver") {
             refrigerator_model = "6324450";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_silver" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324449";
-        }else if ($("#refrigerator_T").val()=="st_green" && $("#refrigerator_M").val()=="st_silver" && $("#refrigerator_B").val()=="st_green"){
+        } else if ($("#refrigerator_T").val() == "st_green" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324448";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324447";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_green"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324446";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_black" && $("#refrigerator_B").val()=="st_silver"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_black" && $("#refrigerator_B").val() == "st_silver") {
             refrigerator_model = "6324445";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324444";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_green" && $("#refrigerator_B").val()=="st_silver"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_green" && $("#refrigerator_B").val() == "st_silver") {
             refrigerator_model = "6324443";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_silver" && $("#refrigerator_B").val()=="st_black"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_black") {
             refrigerator_model = "6324442";
-        }else if ($("#refrigerator_T").val()=="st_silver" && $("#refrigerator_M").val()=="st_silver" && $("#refrigerator_B").val()=="st_green"){
+        } else if ($("#refrigerator_T").val() == "st_silver" && $("#refrigerator_M").val() == "st_silver" && $("#refrigerator_B").val() == "st_green") {
             refrigerator_model = "6324441";
         }
 
 
 
-        if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_pink"){
+        if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324534";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324533";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324532";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324531";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324530";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324529";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324528";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324527";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324526";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324525";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324524";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324523";
-        }else if ($("#refrigerator_T").val()=="mg_mint" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_mint" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324522";
         }
 
-        if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_mint"){
+        if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324521";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324520";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324519";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324518";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324517";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324516";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324515";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324514";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324513";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324512";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324511";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324510";
-        }else if ($("#refrigerator_T").val()=="mg_pink" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_pink" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324509";
         }
-        if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_pink"){
+        if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324508";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324507";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324506";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324505";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324504";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324503";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324502";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324501";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324500";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324499";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324498";
-        }else if ($("#refrigerator_T").val()=="mg_silver" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_silver" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324497";
         }
 
-        if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_pink"){
+        if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324496";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324495";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_mint" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_mint" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324494";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324493";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324492";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_pink" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_pink" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324491";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324490";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324489";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_silver" && $("#refrigerator_B").val()=="mg_beige"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_silver" && $("#refrigerator_B").val() == "mg_beige") {
             refrigerator_model = "6324488";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_mint"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_mint") {
             refrigerator_model = "6324487";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_pink"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_pink") {
             refrigerator_model = "6324486";
-        }else if ($("#refrigerator_T").val()=="mg_beige" && $("#refrigerator_M").val()=="mg_beige" && $("#refrigerator_B").val()=="mg_silver"){
+        } else if ($("#refrigerator_T").val() == "mg_beige" && $("#refrigerator_M").val() == "mg_beige" && $("#refrigerator_B").val() == "mg_silver") {
             refrigerator_model = "6324485";
         }
-    }else if (ord=="3"){
-        if ($("#dish").val()=="st_green")
-        {
+    } else if (ord == "3") {
+        if ($("#dish").val() == "st_green") {
             refrigerator_model = "5565762";
-        }else if ($("#dish").val()=="mg_beige"){
+        } else if ($("#dish").val() == "mg_beige") {
             refrigerator_model = "5565761";
-        }else if ($("#dish").val()=="st_silver"){
+        } else if ($("#dish").val() == "st_silver") {
             refrigerator_model = "6334839";
         }
-    }else if (ord=="4"){
-        if ($("#oven").val()=="st_green")
-        {
+    } else if (ord == "4") {
+        if ($("#oven").val() == "st_green") {
             refrigerator_model = "6222053";
-        }else if ($("#oven").val()=="mg_beige"){
+        } else if ($("#oven").val() == "mg_beige") {
             refrigerator_model = "5565763";
-        }else if ($("#oven").val()=="st_silver"){
+        } else if ($("#oven").val() == "st_silver") {
             refrigerator_model = "6222054";
         }
-    }else if (ord=="5"){
+    } else if (ord == "5") {
         refrigerator_model = "0";
-    }else if (ord=="6"){
-        if ($("#wash_T").val()=="nm_beige" && $("#wash_B").val()=="nm_beige"){
+    } else if (ord == "6") {
+        if ($("#wash_T").val() == "nm_beige" && $("#wash_B").val() == "nm_beige") {
             refrigerator_model = "5782229";
-        }else if ($("#wash_T").val()=="nm_beige" && $("#wash_B").val()=="nm_pink"){
+        } else if ($("#wash_T").val() == "nm_beige" && $("#wash_B").val() == "nm_pink") {
             refrigerator_model = "5782226";
-        }else if ($("#wash_T").val()=="nm_beige" &&  $("#wash_B").val()=="nm_green"){
+        } else if ($("#wash_T").val() == "nm_beige" && $("#wash_B").val() == "nm_green") {
             refrigerator_model = "5782216";
-        }else if ($("#wash_T").val()=="nm_pink" &&  $("#wash_B").val()=="nm_pink"){
+        } else if ($("#wash_T").val() == "nm_pink" && $("#wash_B").val() == "nm_pink") {
             refrigerator_model = "5782239";
-        }else if ($("#wash_T").val()=="nm_pink" &&  $("#wash_B").val()=="nm_beige"){
+        } else if ($("#wash_T").val() == "nm_pink" && $("#wash_B").val() == "nm_beige") {
             refrigerator_model = "5782220";
-        }else if ($("#wash_T").val()=="nm_pink" &&  $("#wash_B").val()=="nm_green"){
+        } else if ($("#wash_T").val() == "nm_pink" && $("#wash_B").val() == "nm_green") {
             refrigerator_model = "5782242";
-        }else if ($("#wash_T").val()=="nm_green" &&  $("#wash_B").val()=="nm_green"){
+        } else if ($("#wash_T").val() == "nm_green" && $("#wash_B").val() == "nm_green") {
             refrigerator_model = "5782223";
-        }else if ($("#wash_T").val()=="nm_green" &&  $("#wash_B").val()=="nm_beige"){
+        } else if ($("#wash_T").val() == "nm_green" && $("#wash_B").val() == "nm_beige") {
             refrigerator_model = "5782232";
-        }else if ($("#wash_T").val()=="nm_green" &&  $("#wash_B").val()=="nm_pink"){
+        } else if ($("#wash_T").val() == "nm_green" && $("#wash_B").val() == "nm_pink") {
             refrigerator_model = "5782235";
         }
-    }else if (ord=="8"){
-        if ($("#styler").val()=="mg_green")
-        {
+    } else if (ord == "8") {
+        if ($("#styler").val() == "mg_green") {
             refrigerator_model = "5565764";
-        }else if ($("#styler").val()=="mg_beige"){
+        } else if ($("#styler").val() == "mg_beige") {
             refrigerator_model = "5565765";
         }
-    }else if (ord=="9"){
+    } else if (ord == "9") {
         refrigerator_model = "6427006";
-    }else if (ord =="7")
-    {
-        if ($("#clean").val()=="calm_green")
-        {
+    } else if (ord == "7") {
+        if ($("#clean").val() == "calm_green") {
             refrigerator_model = "6463221";
-        }else if ($("#clean").val()=="calm_beige"){
+        } else if ($("#clean").val() == "calm_beige") {
             refrigerator_model = "6463218";
         }
     }
 
     //1-김치, 3-식기, 4-광파, 5-정수기, 6-워시타워, 7-청소기,8-스타일러
-    if (refrigerator_model=="0")
-    {
+    if (refrigerator_model == "0") {
         showShopLinkAlert();
-    }else{
-        var urlencode = encodeURIComponent("BestMall/Shop/Item/?key="+refrigerator_model);
-        window.open("https://m.lgbestshopmall.co.kr/lgeobs/OpenLink/1683/?redirectUrl="+urlencode,"_blank");
+    } else {
+        var urlencode = encodeURIComponent("BestMall/Shop/Item/?key=" + refrigerator_model);
+        window.open("https://m.lgbestshopmall.co.kr/lgeobs/OpenLink/1683/?redirectUrl=" + urlencode, "_blank");
         $(".layer_popup, .mask").fadeOut();
     }
 }
-function go_shop2(ord){
+function go_shop2(ord) {
     $(".refrigerator_convertible_popup").fadeOut();
     var refrigerator_model = "0";
-    if (ord=="1")
-    {
-        if ($("#refrigerator_convertible_L").val()=="st_silver"){
+    if (ord == "1") {
+        if ($("#refrigerator_convertible_L").val() == "st_silver") {
             refrigerator_model = "6216088";
-        }else if ($("#refrigerator_convertible_L").val()=="st_green"){
+        } else if ($("#refrigerator_convertible_L").val() == "st_green") {
             refrigerator_model = "5565777";
-        }else if ($("#refrigerator_convertible_L").val()=="st_black"){
+        } else if ($("#refrigerator_convertible_L").val() == "st_black") {
             refrigerator_model = "6216109";
-        }else if ($("#refrigerator_convertible_L").val()=="mg_beige"){
+        } else if ($("#refrigerator_convertible_L").val() == "mg_beige") {
             refrigerator_model = "6216078";
-        }else if ($("#refrigerator_convertible_L").val()=="mg_silver"){
+        } else if ($("#refrigerator_convertible_L").val() == "mg_silver") {
             refrigerator_model = "6216076";
-        }else if ($("#refrigerator_convertible_L").val()=="mg_pink"){
+        } else if ($("#refrigerator_convertible_L").val() == "mg_pink") {
             refrigerator_model = "6216077";
-        }else if ($("#refrigerator_convertible_L").val()=="mg_mint"){
+        } else if ($("#refrigerator_convertible_L").val() == "mg_mint") {
             refrigerator_model = "5878436";
         }
-    }else if (ord=="2"){
-        if ($("#refrigerator_convertible_M").val()=="st_silver"){
+    } else if (ord == "2") {
+        if ($("#refrigerator_convertible_M").val() == "st_silver") {
             refrigerator_model = "5565774";
-        }else if ($("#refrigerator_convertible_M").val()=="st_black"){
+        } else if ($("#refrigerator_convertible_M").val() == "st_black") {
             refrigerator_model = "6216091";//
-        }else if ($("#refrigerator_convertible_M").val()=="mg_beige"){
+        } else if ($("#refrigerator_convertible_M").val() == "mg_beige") {
             refrigerator_model = "5672974";
-        }else if ($("#refrigerator_convertible_M").val()=="mg_silver"){
+        } else if ($("#refrigerator_convertible_M").val() == "mg_silver") {
             refrigerator_model = "6216106";
-        }else if ($("#refrigerator_convertible_M").val()=="mg_pink"){
+        } else if ($("#refrigerator_convertible_M").val() == "mg_pink") {
             refrigerator_model = "6216112";
-        }else if ($("#refrigerator_convertible_M").val()=="mg_mint"){
+        } else if ($("#refrigerator_convertible_M").val() == "mg_mint") {
             refrigerator_model = "6216094";
-        }else if ($("#refrigerator_convertible_M").val()=="st_green"){
+        } else if ($("#refrigerator_convertible_M").val() == "st_green") {
             refrigerator_model = "6335020";
         }
-    }else if (ord=="3"){
-        if ($("#refrigerator_convertible_R").val()=="st_silver"){
+    } else if (ord == "3") {
+        if ($("#refrigerator_convertible_R").val() == "st_silver") {
             refrigerator_model = "5565771";
-        }else if ($("#refrigerator_convertible_R").val()=="st_green"){
+        } else if ($("#refrigerator_convertible_R").val() == "st_green") {
             refrigerator_model = "6216103";
-        }else if ($("#refrigerator_convertible_R").val()=="st_black"){
+        } else if ($("#refrigerator_convertible_R").val() == "st_black") {
             refrigerator_model = "6216085";
-        }else if ($("#refrigerator_convertible_R").val()=="mg_beige"){
+        } else if ($("#refrigerator_convertible_R").val() == "mg_beige") {
             refrigerator_model = "6216075";
-        }else if ($("#refrigerator_convertible_R").val()=="mg_silver"){
+        } else if ($("#refrigerator_convertible_R").val() == "mg_silver") {
             refrigerator_model = "5878435";
-        }else if ($("#refrigerator_convertible_R").val()=="mg_pink"){
+        } else if ($("#refrigerator_convertible_R").val() == "mg_pink") {
             refrigerator_model = "6216097";
-        }else if ($("#refrigerator_convertible_R").val()=="mg_mint"){
+        } else if ($("#refrigerator_convertible_R").val() == "mg_mint") {
             refrigerator_model = "6216100";
         }
     }
-    if (refrigerator_model=="0")
-    {
+    if (refrigerator_model == "0") {
         showShopLinkAlert();
-    }else{
-        var urlencode = encodeURIComponent("BestMall/Shop/Item/?key="+refrigerator_model);
-        window.open("https://m.lgbestshopmall.co.kr/lgeobs/OpenLink/1683/?redirectUrl="+urlencode,"_blank");
+    } else {
+        var urlencode = encodeURIComponent("BestMall/Shop/Item/?key=" + refrigerator_model);
+        window.open("https://m.lgbestshopmall.co.kr/lgeobs/OpenLink/1683/?redirectUrl=" + urlencode, "_blank");
         //$(".layer_popup, .mask").fadeOut();
     }
 }
