@@ -2160,9 +2160,9 @@ var userSelectedModelData = [];
          var outputHtml = '';
          var classes = '';
 
-         /* 220525 start */
+         /* 220525 start 재질컬러 순서변경 */
          var collectionHtml = '';
-         /* 220525 end */
+         /* 220525 end 재질컬러 순서변경 */
 
          for (var i = 0; i < arraySelectedSurface.length; i++) {
             /*outputHtml += '<div class="select_objet_item">' +
@@ -2209,9 +2209,9 @@ var userSelectedModelData = [];
          var targetSideBarArea = (typeof document.querySelector('[data-simulator-sidebar-selector-area]') !== 'undefined') ?
             document.querySelector('[data-simulator-sidebar-selector-area]') : null;
 
-         /* 220525 start */
+         /* 220525 start 재질컬러 순서변경 */
          var selectObjetList = document.querySelector(".select_objet_list");
-         /* 220525 end */
+         /* 220525 end 재질컬러 순서변경 */
 
 
          //이전 선택 위치 저장
@@ -2335,21 +2335,19 @@ var userSelectedModelData = [];
                //@2022-05-18 본품컬러 일괄선택 추가 (s)
                var model_price;
 
-               /* 220518 start */
                if (ID === "refrigerator") {
                   for (var i = 0; i < configData.object.length; i++) {
                      if (configData.object[i].id === "refrigerator") {
                         model_price = configData.object[i].price.product;
                      }
                   }
-                  /* 	outputHtml += '<div class="select_objet_item">';
-                     outputHtml += '<p class="main_tooltip">Choose a Recommended Color</p>';
-                     outputHtml += '<div class="main_color_wrap">';
-                     outputHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf/ico/refrigerator_img.png" alt=""/></div>';
-                     outputHtml += '<div class="txt_wrap"> <span>LG InstaView Objet Collection</span> <p>617L French Door Fridge </br>Green & Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
-                     outputHtml += '<div class="btn_wrap"> <button type="button" id="refrigeratorSetBtn" class="mainColorSet">Select</button> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator" data-setting-btn="refrigeratorSetBtn">Add to Cart</button> </div>';
-                     outputHtml += '</div>';
-                     outputHtml += '</div>'; */
+                  collectionHtml += '<div class="collection_wrap">';
+                  collectionHtml += '<p class="main_tooltip">LG’s recommended colour</p>';
+                  collectionHtml += '<div class="main_color_wrap">';
+                  collectionHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf/ico/refrigerator_img.png" alt=""/></div>';
+                  collectionHtml += '<div class="txt_wrap"> <span>LG InstaView Objet Collection</span> <p>617L French Door Fridge </br>Green & Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
+                  collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator" data-setting-btn="refrigeratorSetBtn">Add to Cart</button> </div> </div></div>';
+                  collectionHtml += '</div>';
                }
                if (ID === "refrigerator_convertible") {
                   for (var i = 0; i < configData.object.length; i++) {
@@ -2358,29 +2356,28 @@ var userSelectedModelData = [];
                      }
                   }
                   if (targetID === 'refrigerator_convertible_L') {
-                     /* 	outputHtml += '<div class="select_objet_item">';
-                        outputHtml += '<p class="main_tooltip">Choose a Recommended Color</p>';
-                        outputHtml += '<div class="main_color_wrap">';
-                        outputHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf_con/ico/Fridge_img.png" alt=""/></div>';
-                        outputHtml += '<div class="txt_wrap"> <span>LG Fridge Objet Collection</span> <p>386L Single Door Bar Fridge </br>Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
-                        outputHtml += '<div class="btn_wrap"> <button type="button" id="convertibleLSetBtn" class="mainColorSet">Select</button> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_L" data-setting-btn="convertibleLSetBtn">Add to Cart</button> </div>';
-                        outputHtml += '</div>';
-                        outputHtml += '</div>'; */
+                     collectionHtml += '<div class="collection_wrap">';
+                     collectionHtml += '<p class="main_tooltip">LG’s recommended colour</p>';
+                     collectionHtml += '<div class="main_color_wrap">';
+                     collectionHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf_con/ico/Fridge_img.png" alt=""/></div>';
+                     collectionHtml += '<div class="txt_wrap"> <span>LG Fridge Objet Collection</span> <p>386L Single Door Bar Fridge </br>Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
+                     collectionHtml += '<div class="btn_wrap">  <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_L" data-setting-btn="convertibleLSetBtn">Add to Cart</button> </div> </div></div>';
+                     collectionHtml += '</div>';
                   }
                   if (targetID === 'refrigerator_convertible_M') {
-                     /* 		outputHtml += '<div class="select_objet_item">';
-                           outputHtml += '<p class="main_tooltip">Choose a Recommended Color</p>';
-                           outputHtml += '<div class="main_color_wrap">';
-                           outputHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf_con/ico/Freezer_img.png" alt=""/></div>';
-                           outputHtml += '<div class="txt_wrap"> <span>LG Freezer Objet Collection</span> <p>324L Upright Bar Freezer </br> Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
-                           outputHtml += '<div class="btn_wrap"> <button type="button" id="convertibleMSetBtn" class="mainColorSet">Select</button> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_M" data-setting-btn="convertibleMSetBtn">Add to Cart</button> </div>';
-                           outputHtml += '</div>';
-                           outputHtml += '</div>'; */
+                     collectionHtml += '<div class="collection_wrap">';
+                     collectionHtml += '<p class="main_tooltip">LG’s recommended colour</p>';
+                     collectionHtml += '<div class="main_color_wrap">';
+                     collectionHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf_con/ico/Freezer_img.png" alt=""/></div>';
+                     collectionHtml += '<div class="txt_wrap"> <span>LG Freezer Objet Collection</span> <p>324L Upright Bar Freezer </br> Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
+                     collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_M" data-setting-btn="convertibleMSetBtn">Add to Cart</button> </div>';
+                     collectionHtml += '</div>';
+                     collectionHtml += '</div>';
                   }
                }
-               /* 220518 end */
                //@2022-05-18 본품컬러 일괄선택 추가 (e)
 
+               $(".select_objet_list").find(".collection_wrap").length < 1 && $(".select_objet_list").prepend(collectionHtml)
                targetSideBarArea.innerHTML = outputHtml;
 
                window.Scrollbar.init(targetSideBarArea);
