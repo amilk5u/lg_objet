@@ -1100,7 +1100,7 @@
 				<li class="swiper-slide"><button type="button" title="Experience" data-navi-idx="2" data-link-name="Experience">Experience</button></li>
 				<li class="swiper-slide"><button type="button" title="Product" data-navi-idx="4" data-link-name="Product">Product</button></li>
 				<li class="swiper-slide"><button type="button" title="Gallery" data-navi-idx="5" data-link-name="Gallery">Gallery</button></li>
-				<li class="swiper-slide"><button type="button" title="FAQ" data-navi-idx="6" data-link-name="FAQ">FAQ</button></li>
+				<li class="swiper-slide"><button type="button" title="Objet FAQs" data-navi-idx="6" data-link-name="FAQs">Objet FAQs</button></li>
 			</ul>
 		</div>
 	</div>
@@ -1435,7 +1435,9 @@
 												<ul>
 												</ul>
 											</div>
-											<p class="comment_txt">Select a product to go to the details page<br>Not all models available in Australia</p>
+											<!-- 220526 delete start -->
+											<!-- <p class="comment_txt">Select a product to go to the details page<br>Not all models available in Australia</p> -->
+											<!-- 220526 delete end -->
 										</div>
 										<button type="button" class="btn_close"><span class="blind">close</span></button>
 									</div>
@@ -1495,7 +1497,7 @@
 										</div>
 										<button type="button" class="btn_close"><span class="blind">close</span></button>
 										<!-- @2022-05-18 Glass → 본품 선택시, refresh 버튼 초기화 기능 테스트중 (s) -->
-										<button type="button" class="btn_refresh">refresh</button>
+										<!-- <button type="button" class="btn_refresh">refresh</button> -->
 										<!-- @2022-05-18 Glass → 본품 선택시, refresh 버튼 초기화 기능 테스트중 (e) -->
 									</div>
 								</div>
@@ -1613,8 +1615,9 @@
 						</div>
 						<div class="product_list">
 							<ul>
+								<!-- 220526 start -->
 								<li>
-									<a href="javascript:comingSoon();" data-link-name="move to larder">
+									<a href="https://www.lg.com/au/objet-collection/lg-mf-b664" data-link-name="move to larder">
 										<div class="default_cont">
 											<img src="./images/objet/pic_product01.png" alt="Single Door Fridge" class="default_img" />
 											<img src="./images/objet/pic_product01_hover.png" alt="Single Door Fridge" class="hover_img" />
@@ -1623,7 +1626,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="javascript:comingSoon();" data-link-name="move to freezer">
+									<a href="https://www.lg.com/au/objet-collection/lg-mp-l386" data-link-name="move to freezer">
 										<div class="default_cont">
 											<img src="./images/objet/pic_product02.png" alt="Upright Freezer" class="default_img" />
 											<img src="./images/objet/pic_product02_hover.png" alt="Upright Freezer" class="hover_img" />
@@ -1643,7 +1646,7 @@
 									</a>
 								</li> -->
 								<li>
-									<a href="javascript:comingSoon();" data-link-name="InstaView">
+									<a href="https://www.lg.com/au/freezers/lg-mp-f324" data-link-name="InstaView">
 										<div class="default_cont">
 											<img src="./images/objet/pic_product04.png" alt="InstaView® French Door Fridge" class="default_img" />
 											<img src="./images/objet/pic_product04_hover.png" alt="InstaView® French Door Fridge" class="hover_img" />
@@ -1651,6 +1654,7 @@
 										</div>
 									</a>
 								</li>
+								<!-- 220526 end -->
 								<li>
 									<span>
 										<div class="ico_cont">
@@ -1758,11 +1762,10 @@
                </div>
                <div id="innerFAQ" class="inner_contents">
                   <div class="inner_wrap">
-                     <!-- <h1>Any Questions? Ask Us!</h1> -->
                      <div class="title">
                         <h2>Any Questions? Ask Us!</h2>
                      </div>
-                     <div>
+                     <div class="faq_cont">
                         <dl>
                            <dt>
                               <button type="button">

@@ -375,7 +375,6 @@ $("#save").on("click", function () {
             popCont += '</li>';
         }
 
-
         /* 220524 start */
         if ($("#refrigerator_bottomFreezer_T").val() != "" && $("#refrigerator_bottomFreezer_M").val() != "" ) {//refrigerator_bottomFreezer
             let nm = "rf_bf";

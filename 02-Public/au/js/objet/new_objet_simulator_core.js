@@ -2209,11 +2209,6 @@ var userSelectedModelData = [];
          var targetSideBarArea = (typeof document.querySelector('[data-simulator-sidebar-selector-area]') !== 'undefined') ?
             document.querySelector('[data-simulator-sidebar-selector-area]') : null;
 
-         /* 220525 start 재질컬러 순서변경 */
-         var selectObjetList = document.querySelector(".select_objet_list");
-         /* 220525 end 재질컬러 순서변경 */
-
-
          //이전 선택 위치 저장
          var scrollx = 0
          /*if(window.Scrollbar.has(targetSideBarArea)){
@@ -2243,6 +2238,7 @@ var userSelectedModelData = [];
              }
          }
          */
+
          /* 220525 start 재질컬러 순서 변경 */
          if (targetSideBarArea !== null && window.Scrollbar) {
             if (window.Scrollbar.has(targetSideBarArea)) {
@@ -2266,7 +2262,6 @@ var userSelectedModelData = [];
                   collectionHtml += '<div class="txt_wrap"> <span>LG InstaView Objet Collection</span> <p>617L French Door Fridge </br>Green & Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
                   collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator" data-setting-btn="refrigeratorSetBtn">Add to Cart</button> </div> </div></div>';
                   collectionHtml += '</div>';
-
                }
                if (ID === "refrigerator_convertible") {
                   for (var i = 0; i < configData.object.length; i++) {
@@ -2289,16 +2284,17 @@ var userSelectedModelData = [];
                      collectionHtml += '<div class="main_color_wrap">';
                      collectionHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf_con/ico/Freezer_img.png" alt=""/></div>';
                      collectionHtml += '<div class="txt_wrap"> <span>LG Freezer Objet Collection</span> <p>324L Upright Bar Freezer </br> Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
-                     collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_M" data-setting-btn="convertibleMSetBtn">Add to Cart</button> </div>';
-                     collectionHtml += '</div>';
+                     collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_M" data-setting-btn="convertibleMSetBtn">Add to Cart</button> </div></div></div>';
                      collectionHtml += '</div>';
                   }
                }
                //@2022-05-18 본품컬러 일괄선택 추가 (e)
 
+               console.log(collectionHtml);
 
+               $(".select_objet_list > p").length < 1 && $(".select_objet_list").prepend('<p></p>')
+               document.querySelector('.select_objet_list > p').innerHTML = collectionHtml
 
-               $(".select_objet_list").find(".collection_wrap").length < 1 && $(".select_objet_list").prepend(collectionHtml)
                targetSideBarArea.innerHTML = outputHtml;
 
                var scrollbar = window.Scrollbar.init(targetSideBarArea);
@@ -2370,14 +2366,14 @@ var userSelectedModelData = [];
                      collectionHtml += '<div class="main_color_wrap">';
                      collectionHtml += '<div class="img_wrap"> <img src="images/objet/simulator/appliances/rf_con/ico/Freezer_img.png" alt=""/></div>';
                      collectionHtml += '<div class="txt_wrap"> <span>LG Freezer Objet Collection</span> <p>324L Upright Bar Freezer </br> Silver Stainless Steel</p> <span class="price_num">' + model_price + '</span>';
-                     collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_M" data-setting-btn="convertibleMSetBtn">Add to Cart</button> </div>';
-                     collectionHtml += '</div>';
+                     collectionHtml += '<div class="btn_wrap"> <button type="button" class="btn_modelRestBtn" data-objet-id="refrigerator_convertible_M" data-setting-btn="convertibleMSetBtn">Add to Cart</button> </div></div></div>';
                      collectionHtml += '</div>';
                   }
                }
                //@2022-05-18 본품컬러 일괄선택 추가 (e)
 
-               $(".select_objet_list").find(".collection_wrap").length < 1 && $(".select_objet_list").prepend(collectionHtml)
+               $(".select_objet_list > p").length < 1 && $(".select_objet_list").prepend('<p></p>')
+               document.querySelector('.select_objet_list > p').innerHTML = collectionHtml
                targetSideBarArea.innerHTML = outputHtml;
 
                window.Scrollbar.init(targetSideBarArea);
@@ -2391,9 +2387,9 @@ var userSelectedModelData = [];
 
             if (ID === "refrigerator" || ID === "refrigerator_convertible") {
                if (ID === "refrigerator") {
-                  if (targetID === "refrigerator_LT") activeObjetSelector = "Top Left Panel";
-                  if (targetID === "refrigerator_LB") activeObjetSelector = "Bottom Left Panel";
-                  if (targetID === "refrigerator_RB") activeObjetSelector = "Bottom Right Panel";
+                  if (targetID === "refrigerator_LT") activeObjetSelector = '<i>Top</i> Left Panel';
+                  if (targetID === "refrigerator_LB") activeObjetSelector = '<i>Bottom</i> Left Panel';
+                  if (targetID === "refrigerator_RB") activeObjetSelector = '<i>Bottom</i> Right Panel';
 
                   for (var i = 0; i < configData.object.length; i++) {
                      if (configData.object[i].id === "refrigerator") {

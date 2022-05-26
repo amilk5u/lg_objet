@@ -634,8 +634,8 @@ $("body").on("click", ".btn_cta", function () {
                   var _selectColorInfo, _selectColorInfoArr;
                   var _selectCode, _selectLocation, _selectColor, _selectType;
                   if (key === "refrigerator_LT") {
-                     // _selectLocation = "upper_left";
-                     _selectLocation = "top";
+                     _selectLocation = "upper left";
+                     // _selectLocation = "top";
                      _selectCode = userSelectData.refrigerator_LT.modelCode;
                      _selectColorInfo = userSelectData.refrigerator_LT.modelColor;
                      _selectColorInfoArr = _selectColorInfo.split('_');
@@ -643,8 +643,8 @@ $("body").on("click", ".btn_cta", function () {
                      (_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
                   }
                   if (key === "refrigerator_LB") {
-                     // _selectLocation = "lower_left";
-                     _selectLocation = "bottom";
+                     _selectLocation = "lower left";
+                     // _selectLocation = "bottom";
                      _selectCode = userSelectData.refrigerator_LB.modelCode;
                      _selectColorInfo = userSelectData.refrigerator_LB.modelColor;
                      _selectColorInfoArr = _selectColorInfo.split('_');
@@ -652,8 +652,8 @@ $("body").on("click", ".btn_cta", function () {
                      (_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
                   }
                   if (key === "refrigerator_RB") {
-                     // _selectLocation = "lower_right";
-                     _selectLocation = "bottom";
+                     _selectLocation = "lower right";
+                     // _selectLocation = "bottom";
                      _selectCode = userSelectData.refrigerator_RB.modelCode;
                      _selectColorInfo = userSelectData.refrigerator_RB.modelColor;
                      _selectColorInfoArr = _selectColorInfo.split('_');
@@ -752,7 +752,7 @@ $("body").on("click", ".btn_cta", function () {
             (_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
 
             var userSelectOptList = "";
-            userSelectOptList = _selectCode + ',' + _selectColor + ',' + _selectType;
+            userSelectOptList = _selectCode + ',full cover,' + _selectColor + ',' + _selectType;
             // console.log(userSelectOptList);
 
             var cartData = {
@@ -800,7 +800,7 @@ $("body").on("click", ".btn_cta", function () {
             (_selectColorInfoArr[1] == "black") ? _selectColor = "matte Black" : _selectColor = _selectColorInfoArr[1];
 
             var userSelectOptList = "";
-            userSelectOptList = _selectCode + ',' + _selectColor + ',' + _selectType;
+            userSelectOptList = _selectCode + ',full cover,' + _selectColor + ',' + _selectType;
             // console.log(userSelectOptList);
 
             var cartData = {

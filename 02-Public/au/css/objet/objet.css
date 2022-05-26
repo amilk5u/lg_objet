@@ -91,9 +91,7 @@
 .objet_slide_cont[data-cont-idx="0"] .cont_inner .single_banner .sb_txt { font-size: 15px; width: 80%; margin: 10px auto 0; } 
 .objet_slide_cont[data-cont-idx="0"] .cont_inner .single_banner .desc { bottom: 10px; font-size: 13px; } 
 .objet_slide_cont[data-cont-idx="0"] .cont_inner .single_banner .title h2 { font-size: 35px; } 
-/* 220524 end */
-
-} 
+/* 220524 end */ } 
 
 
 
@@ -601,17 +599,18 @@
 
 /* 220525 start 재질컬러 순서 변경 */
 /*@2022-05-18 선택값에 따라 select_objet 타이틀 변경 (s)*/
-.select_objet_list .type01 { padding:20px 0 0; }
+.select_objet_list .type01 { padding:20px 0 0; } 
 .select_objet_list .type01 .h3Tile > span { display:block; color:#686868; font-size: 17px; font-weight:600; } 
+.select_objet_list .type01 .h3Tile > span i { color: #ff2a2a; font-style: normal; } 
 /* .select_objet_list .type01 .h3Tile > span em { color:#181818; } */
 .select_objet_list .type01 .h3Tile > strong { font-size: 29px; color: #2e2e2e; line-height: 30px; display: block; font-weight: 700; } 
 /* .select_objet_list .type01 .h3Tile > em { display:block; font-size:14px; color:red; font-weight:400; } */
 /* .select_objet_list .type01 .h3Tile > em span { font-weight:700; } */
 .select_objet .main_tooltip { padding: 0 0 5px; font-size: 22px; font-weight: 600; color: #c1171f; text-align: center; } 
 
-.select_objet .collection_wrap { padding:0 5px 4px; } 
+/* .select_objet .collection_wrap { padding:0 5px 4px; } */
 .select_objet .collection_wrap .main_tooltip { padding: 0 0 10px; } 
-.select_objet .collection_wrap .main_color_wrap { width:max-content; margin:0 auto; border:1px solid #eeedee; padding:10px; border-radius: 20px; box-sizing: border-box; box-shadow: 0 5px 10px #e1e1e1; } 
+.select_objet .collection_wrap .main_color_wrap { width:90%; margin:0 auto; border:1px solid #eeedee; padding:10px; border-radius: 20px; box-sizing: border-box; box-shadow: 0 5px 10px #e1e1e1; } 
 .select_objet .collection_wrap .main_color_wrap:after { content: ""; display: block; clear: both; } 
 .select_objet .collection_wrap .main_color_wrap .img_wrap { width:100px; display: flex; float:left; padding:14px 0; background-color: #f2f2f2; border-radius: 20px; } 
 .select_objet .collection_wrap .main_color_wrap .img_wrap img { height:80px; display: block; margin:0 auto; } 
@@ -639,7 +638,7 @@
 .objet label .spot { display:none; } 
 
 @media screen and (max-width: 767px){
-.bg_type_sel.type02 .objet-bx > ul { padding:25px 20px 0 20px; } 
+ .bg_type_sel.type02 .objet-bx > ul { padding:25px 20px 0 20px; } 
 .bg_type_sel.type02 .objet-bx > ul > li button { width:70px; padding-top:70px; } 
 .bg_type_sel.type02 .objet-bx > ul > li button:after { padding-top:70px; } 
 .select_objet.active { width: auto !important; left:15px; right:15px; bottom:15px; transform: translateY(0); } 
@@ -648,12 +647,12 @@
 
 
 /* 220525 start 재질/컬러 순서변경 */
-.select_objet_list .type01 { padding:0; order:1; }
+.select_objet_list .type01 { padding:0; order:1; } 
 .select_objet_list .type01 .objet-bx .scroll-content { padding:10px; white-space: nowrap; display: flex; } 
-
-.select_objet .select_objet_list { display: flex; overflow-x: scroll; overflow-y: hidden; }
-.select_objet .select_objet_list:after { display: block; content: ""; clear: both; }
-.select_objet .collection_wrap { width: auto !important; display:inline-block; padding:0; order:2; padding:10px 20px 0 0; } 
+.select_objet .select_objet_list { display: flex; overflow-x: scroll; overflow-y: hidden; } 
+.select_objet .select_objet_list:after { display: block; content: ""; clear: both; } 
+.select_objet .select_objet_list > p { order:2; } 
+.select_objet .collection_wrap { width: auto !important; display:inline-block; padding:0; padding:10px 20px 0 0; } 
 .select_objet .collection_wrap .main_tooltip { padding:0; font-size: 15px; text-align: left; } 
 .select_objet .collection_wrap .main_color_wrap { width:310px !important; margin:5px 10px 20px 0; border-radius: 10px; padding:8px; } 
 .select_objet .collection_wrap .main_color_wrap .txt_wrap span.price_num { padding:0; } 
@@ -708,37 +707,37 @@
 .modal.basket .modal-content .modal-footer a { width:50%; margin:0 0 0 0.5rem; } 
 /* 220524 end */
 
-
-/* 220525 start */
+/* 220526 start */
 #innerFAQ { background-color: #EDEDED; } 
-#innerFAQ .inner_wrap { text-align: center; padding: 0 2.5rem 6rem; max-width: 1380px; margin: 0 auto; } 
-#innerFAQ .inner_wrap h1 { padding: 4.5rem 0 0; font-size: 40px; } 
-#innerFAQ .inner_wrap > div { padding: 3.3rem 0 0; } 
-#innerFAQ .inner_wrap dl { overflow: hidden; border: 0.1rem solid #E6E6E6; background-color: #fff; text-align: left; margin: 0.5rem 0 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -webkit-border-radius: 0.7rem; -moz-border-radius: 0.7rem; border-radius: 0.7rem; } 
+#innerFAQ .inner_wrap .faq_cont { padding:50px 0 0; } 
+#innerFAQ .inner_wrap { text-align: center; padding: 0 50px 120px; max-width: 1480px; margin: 0 auto; } 
+#innerFAQ .inner_wrap h1 { padding: 30px 0 0; font-size: 40px; } 
+#innerFAQ .inner_wrap > div { padding: 130px 0 0; } 
+#innerFAQ .inner_wrap dl { overflow: hidden; border: 2px solid #E6E6E6; background-color: #fff; text-align: left; margin: 10px 0 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -webkit-border-radius: 0.7rem; -moz-border-radius: 0.7rem; border-radius: 0.7rem; } 
 #innerFAQ .inner_wrap dl:first-of-type { margin: 0; } 
 #innerFAQ .inner_wrap dl.on dt:after { -webkit-transform: rotate(0); -moz-transform: rotate(0); -ms-transform: rotate(0); -o-transform: rotate(0); transform: rotate(0); } 
-#innerFAQ .inner_wrap dt { padding: 0 0 0 6.65rem; position: relative; } 
-#innerFAQ .inner_wrap dt:after { width: 1.2rem; height: 0.75rem; position: absolute; right: 3rem; top: 45%; content: ""; display: block; background: url(./../../images/main/question_icon.png) 50% 50% no-repeat; background-size: cover; -webkit-transition: all 0.25s ease; -moz-transition: all 0.25s ease; -o-transition: all 0.25s ease; -ms-transition: all 0.25s ease; -webkit-transform: rotate(-180deg); -moz-transform: rotate(-180deg); -ms-transform: rotate(-180deg); -o-transform: rotate(-180deg); transform: rotate(-180deg); } 
-#innerFAQ .inner_wrap dt:before { position: absolute; display: block; content: "Q"; left: 3rem; top: 1.5rem; font-size: 2rem; font-weight: 600; } 
-#innerFAQ .inner_wrap dt button { width: 100%; text-align: left; padding: 1.75rem 15rem 1.5rem 0; display: block; } 
-#innerFAQ .inner_wrap dt p { font-size: 1.35rem; font-weight: 400; line-height: 1.75rem; } 
-#innerFAQ .inner_wrap dd { height: 0; padding: 0 0 0 6.65rem; position: relative; } 
-#innerFAQ .inner_wrap dd:before { position: absolute; display: block; content: "A"; left: 3rem; color: #C80651; top: 1.9rem; font-size: 2rem; font-weight: 600; } 
+#innerFAQ .inner_wrap dt { padding: 0 0 0 133px; position: relative; } 
+#innerFAQ .inner_wrap dt:after { width: 24px; height: 15px; position: absolute; right: 60px; top: 45%; content: ""; display: block; background: url(../../images/objet/question_icon.png) 50% 50% no-repeat; background-size: cover; -webkit-transition: all 0.25s ease; -moz-transition: all 0.25s ease; -o-transition: all 0.25s ease; -ms-transition: all 0.25s ease; -webkit-transform: rotate(-180deg); -moz-transform: rotate(-180deg); -ms-transform: rotate(-180deg); -o-transform: rotate(-180deg); transform: rotate(-180deg); } 
+#innerFAQ .inner_wrap dt:before { position: absolute; display: block; content: "Q"; left: 60px; top: 21px; font-size: 40px; font-weight: 600; } 
+#innerFAQ .inner_wrap dt button { width: 100%; text-align: left; padding: 35px 103px 30px 0; display: block; outline: none; } 
+#innerFAQ .inner_wrap dt p { font-size: 27px; font-weight: 400; line-height: 35px; } 
+#innerFAQ .inner_wrap dd { height: 0; padding: 0 0 0 133px; position: relative; margin:0; } 
+#innerFAQ .inner_wrap dd:before { position: absolute; display: block; content: "A"; left: 60px; color: #C80651; top: 31px; font-size: 40px; font-weight: 600; } 
 #innerFAQ .inner_wrap dd:after { content: ""; position: absolute; display: block; width: 100%; top: 0; left: 0; height: 1px; background-color: #E6E6E6; } 
-#innerFAQ .inner_wrap dd p { padding: 2.15rem 15rem 2.15rem 0; font-size: 1.15rem; font-weight: 400; color: #939393; line-height: 1.4rem; } 
+#innerFAQ .inner_wrap dd p { padding: 43px 60px 43px 0; font-size: 23px; font-weight: 400; color: #939393; line-height: 28px; } 
 
 @media screen and (max-width: 768px){
- #innerFAQ .inner_wrap { padding: 0 2rem 4.4rem; } 
- #innerFAQ .inner_wrap h1 { padding: 4.1rem 0 0; font-size: 2.4rem; } 
- #innerFAQ .inner_wrap > div { padding: 3rem 0 0; } 
- #innerFAQ .inner_wrap dl { margin: 1.5rem 0 0; } 
- #innerFAQ .inner_wrap dt { padding: 0 0 0 5.1rem; } 
- #innerFAQ .inner_wrap dt:after { width: 1.65rem; height: 1rem; right: 2rem; background: url(./../../images/main/question_icon_m.png) 50% 50% no-repeat; background-size: cover; } 
- #innerFAQ .inner_wrap dt:before { left: 1.75rem; top: 2.3rem; font-size: 2.55rem; } 
- #innerFAQ .inner_wrap dt button { padding: 2.5rem 5rem 2.15rem 0; color: #000; } 
- #innerFAQ .inner_wrap dt p { font-size: 1.9rem; line-height: 2rem; } 
- #innerFAQ .inner_wrap dd { padding: 0 0 0 5.1rem; } 
- #innerFAQ .inner_wrap dd:before { left: 1.75rem; top: 2.4rem; font-size: 2.7rem; } 
- #innerFAQ .inner_wrap dd p { padding: 2.5rem 3.75rem 2.5rem 0; width: auto; font-size: 1.7rem; line-height: 2rem; font-weight: 400; } 
+ #innerFAQ .inner_wrap { padding: 0 20px 88px; } 
+ #innerFAQ .inner_wrap h1 { padding: 82px 0 0; font-size: 48px; } 
+ #innerFAQ .inner_wrap > div { padding: 60px 0 0; } 
+ #innerFAQ .inner_wrap dl { margin: 10px 0 0; } 
+ #innerFAQ .inner_wrap dt { padding: 0 0 0 80px; } 
+ #innerFAQ .inner_wrap dt:after { width: 20px; height: 13px; right: 30px; background: url(../../images/objet/question_icon.png) 50% 50% no-repeat; background-size: cover; } 
+ #innerFAQ .inner_wrap dt:before { left: 32px; top: 17px; font-size: 30px; } 
+ #innerFAQ .inner_wrap dt button { padding:25px 60px 23px 0; color: #000; } 
+ #innerFAQ .inner_wrap dt p { font-size: 25px; line-height: 30px; } 
+ #innerFAQ .inner_wrap dd { padding: 0 0 0 80px; } 
+ #innerFAQ .inner_wrap dd:before { left: 35px; top: 20px; font-size: 30px; } 
+ #innerFAQ .inner_wrap dd p { padding: 25px 50px 30px 0; width: auto; font-size: 25px; line-height: 30px; font-weight: 400; } 
  }
-/* 220525 end */
+/* 220526 end */

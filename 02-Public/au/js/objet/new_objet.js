@@ -143,14 +143,22 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
       $(".objet_slide_cont").removeClass("is_active");
       $(".objet_slide_cont:eq(" + idx + ")").addClass("is_active");
       if (idx != 2) {
+         console.log('어디?1')
          $(".objetcollection-tabs .tabs li").removeClass("on");
          $(".objetcollection-tabs .tabs li:eq(" + idx + ")").addClass("on");
       } else {
+         console.log('2')
          if ($(".objet_slide_cont:last-child").scrollTop() == 0 || $(".objet_slide_cont:last-child").scrollTop() == "0px") {
+            console.log('3')
             $(".objetcollection-tabs .tabs li").removeClass("on");
             $(".objetcollection-tabs .tabs li:eq(" + idx + ")").addClass("on");
          }
       }
+
+
+
+
+
       if (idx == 1) {
          $(".objet_slide_cont:eq(1) .video_area video").get(0).play();
       } else {
@@ -336,7 +344,6 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
             } else if (startY - endY < 50 || endY - startY < 50) { }
          }
       });
-
    }
    $(".objetcollection-tabs .tabs button").on("click", function () {
       let naviIdx = $(this).attr("data-navi-idx");
@@ -357,7 +364,7 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
          naviTH = naviTH + thisH;
          naviH.push(naviTH);
       });
-      //console.log("naviH",naviH);
+
       if (naviIdx == "0") {
          goSlideIdx(0, 200);
          $(".objet_slide_cont:last-child").scrollTop(0);
@@ -380,7 +387,11 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
       } else if (naviIdx == "5") {
          goSlideIdx(2, 200);
          $(".objet_slide_cont:last-child").animate({ "scrollTop": naviH[2] + 10 }, 1000);
+         /* 220526 start */
+      } else if (naviIdx == "6") {
+         $(".objet_slide_cont:last-child").animate({ "scrollTop": naviH[3] + 10 }, 1000);
       }
+      /* 220526 end */
       swiperTab.slideTo(naviIdx);
 
    });
@@ -415,10 +426,12 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
          } else if (scrollT < scrollArry[3]) {
             $(".objetcollection-tabs .tabs li:eq(4)").siblings().removeClass("on");
             $(".objetcollection-tabs .tabs li:eq(4)").addClass("on");
-         }/*else if(scrollT < scrollArry[3]){
+         /* 220526 start */
+         }else if(scrollT < scrollArry[4]){
 				$(".objetcollection-tabs .tabs li:eq(5)").siblings().removeClass("on");
 				$(".objetcollection-tabs .tabs li:eq(5)").addClass("on");
-			}*/
+			}
+         /* 220526 end */
       }
    });
 
@@ -519,28 +532,27 @@ function goStepL(goStepLev) {
 }
 
 
+/* 220526 start */
 const $innerFAQ = $("#innerFAQ"),
-      $questDt = $innerFAQ.find("dt");
+   $questDt = $innerFAQ.find("dt");
 
 // Faq 질문 답변 클릭
-function faqAction() {
-   $questDt.on("click", function () {
-      let _this = $(this);
-      let $questionDl = _this.parent(),
-         $questionDd = $questionDl.find("dd"),
-         $answerP = $questionDl.find(".answer").outerHeight();
+$questDt.on("click", function () {
+   let _this = $(this);
+   let $questionDl = _this.parent(),
+      $questionDd = $questionDl.find("dd"),
+      $answerP = $questionDl.find(".answer").outerHeight();
 
-         console.log(_this)
-         console.log('$questionDl :  '+$questionDl)
-         console.log('$questionDd : '+$questionDd)
+   console.log(_this)
+   console.log('$questionDl :  ' + $questionDl)
+   console.log('$questionDd : ' + $questionDd)
 
-      if (!$questionDl.hasClass("on")) {
-         TweenMax.to($questionDd, .25, { height: $answerP });
-         $questionDl.addClass("on");
-      } else {
-         TweenMax.to($questionDd, .25, { height: 0 });
-         $questionDl.removeClass("on");
-      }
-   })
-}
-faqAction();
+   if (!$questionDl.hasClass("on")) {
+      TweenMax.to($questionDd, .25, { height: $answerP });
+      $questionDl.addClass("on");
+   } else {
+      TweenMax.to($questionDd, .25, { height: 0 });
+      $questionDl.removeClass("on");
+   }
+})
+/* 220526 end */

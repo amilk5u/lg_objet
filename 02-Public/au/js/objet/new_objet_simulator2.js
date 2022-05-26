@@ -311,7 +311,10 @@ $("#save").on("click", function () {
          popCont += '		<img src="' + mixNm + '" alt="larder" />';
          //popCont += '		<span class="nm">'+nmTxt+'</span>';
          popCont += '	</div>';
-         popCont += '	<p class="direct_txt">Learn more</p>';
+         
+         /* 220526 delete start */
+         // popCont += '	<p class="direct_txt">Learn more</p>';
+         /* 220526 delete end */
 
          //@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (s)
          // popCont += '	<a href="' + tarLinkA + '" ' + target + ' class="go_detail au_go_detail_btn1" data-link-name="move to larder Learn more"><span>Single Door<br>Fridge</span></a>';
@@ -364,7 +367,9 @@ $("#save").on("click", function () {
          popCont += '		<img src="' + mixNm + '" alt="freezer" />';
          //popCont += '		<span class="nm">'+nmTxt+'</span>';
          popCont += '	</div>';
-         popCont += '	<p class="direct_txt">Learn more</p>';
+         /* 220526 delete start */
+         // popCont += '	<p class="direct_txt">Learn more</p>';
+         /* 220526 end start */
 
          //@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (s)
          // popCont += '	<a href="' + tarLinkA + '" ' + target + ' class="go_detail au_go_detail_btn1" data-link-name="move to larder Learn more"><span>Single Door<br>Fridge</span></a>';
@@ -401,7 +406,6 @@ $("#save").on("click", function () {
          // popCont += '		<img src="' + mixNm + '" alt="" class="rf_default" />';
          popCont += '		<img src="' + userSelectImg + '" alt="" class="rf_userSelectImage" />';
          //@2022-05-18 선택값에 따른 냉장고 이미지 추출 (e)
-
          popCont += '	</div>';
 
          //@2022-05-18 장바구니 CTA 버튼추가 및 PDP 버튼 숨김처리 (s)
