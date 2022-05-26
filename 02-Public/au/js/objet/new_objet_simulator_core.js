@@ -2290,11 +2290,8 @@ var userSelectedModelData = [];
                }
                //@2022-05-18 본품컬러 일괄선택 추가 (e)
 
-               console.log(collectionHtml);
-
                $(".select_objet_list > p").length < 1 && $(".select_objet_list").prepend('<p></p>')
                document.querySelector('.select_objet_list > p').innerHTML = collectionHtml
-
                targetSideBarArea.innerHTML = outputHtml;
 
                var scrollbar = window.Scrollbar.init(targetSideBarArea);

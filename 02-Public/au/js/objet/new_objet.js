@@ -143,22 +143,14 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
       $(".objet_slide_cont").removeClass("is_active");
       $(".objet_slide_cont:eq(" + idx + ")").addClass("is_active");
       if (idx != 2) {
-         console.log('어디?1')
          $(".objetcollection-tabs .tabs li").removeClass("on");
          $(".objetcollection-tabs .tabs li:eq(" + idx + ")").addClass("on");
       } else {
-         console.log('2')
          if ($(".objet_slide_cont:last-child").scrollTop() == 0 || $(".objet_slide_cont:last-child").scrollTop() == "0px") {
-            console.log('3')
             $(".objetcollection-tabs .tabs li").removeClass("on");
             $(".objetcollection-tabs .tabs li:eq(" + idx + ")").addClass("on");
          }
       }
-
-
-
-
-
       if (idx == 1) {
          $(".objet_slide_cont:eq(1) .video_area video").get(0).play();
       } else {
@@ -181,10 +173,7 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
 
          }
       });
-
-
       sizeSet(aniTime);
-
    }
    /*var mGallery = function(){
       let activeGIdx = $("#innerGallery .gallery_list > ul li.is_active").index();
@@ -389,6 +378,7 @@ if (navigator.userAgent.match(/Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|Net
          $(".objet_slide_cont:last-child").animate({ "scrollTop": naviH[2] + 10 }, 1000);
          /* 220526 start */
       } else if (naviIdx == "6") {
+         goSlideIdx(2, 200);
          $(".objet_slide_cont:last-child").animate({ "scrollTop": naviH[3] + 10 }, 1000);
       }
       /* 220526 end */
@@ -542,10 +532,6 @@ $questDt.on("click", function () {
    let $questionDl = _this.parent(),
       $questionDd = $questionDl.find("dd"),
       $answerP = $questionDl.find(".answer").outerHeight();
-
-   console.log(_this)
-   console.log('$questionDl :  ' + $questionDl)
-   console.log('$questionDd : ' + $questionDd)
 
    if (!$questionDl.hasClass("on")) {
       TweenMax.to($questionDd, .25, { height: $answerP });

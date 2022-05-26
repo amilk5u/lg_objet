@@ -204,6 +204,8 @@ var go_shop_model = "";
 						defaultImage: 'appliances/rf_bf/freezer_door01_nomal.png', //첫 오브제 기기 init 시 보여줄 selection 이미지
 						Surface: [
 							{ colorCode: 'mg_beige', filename: 'appliances/rf_bf/freezer_door01_03mg_beige.png' },
+							{ colorCode: 'mg_pink', filename: 'appliances/rf_bf/freezer_door01_03mg_pink.png' }, 
+							{ colorCode: 'mg_mint', filename: 'appliances/rf_bf/freezer_door01_03mg_mint.png' }, 
 							{ colorCode: 'mg_sliver', filename: 'appliances/rf_bf/freezer_door01_03mg_sliver.png' },
 							{ colorCode: 'nm_black', filename: 'appliances/rf_bf/freezer_door01_04nm_black.png' },
 						],
@@ -216,8 +218,10 @@ var go_shop_model = "";
 						defaultImage: 'appliances/rf_bf/freezer_door02_nomal.png',
 						Surface: [
 							{ colorCode: 'mg_beige', filename: 'appliances/rf_bf/freezer_door02_03mg_beige.png' },
-							{ colorCode: 'mg_sliver', filename: 'appliances/rf_bf/freezer_door02_03mg_sliver.png' },
-							{ colorCode: 'nm_black', filename: 'appliances/rf_bf/freezer_door02_04nm_black.png' },
+							{ colorCode: 'mg_pink', filename: 'appliances/rf_bf/freezer_door02_03mg_pink.png' },
+							{ colorCode: 'mg_mint', filename: 'appliances/rf_bf/freezer_door02_03mg_mint.png' },
+							{ colorCode: 'mg_sliver', filename: 'appliances/rf_bf/freezer_door02_03mg_sliver.png' }, 
+							{ colorCode: 'nm_black', filename: 'appliances/rf_bf/freezer_door02_04nm_black.png' }, 
 						],
 					}
 				],
@@ -226,6 +230,8 @@ var go_shop_model = "";
 						name: 'Mist',
 						colors: [
 							{ name: 'Mist<br />Beige', colorChip: 'color_03mg_beige.png', colorCode: 'mg_beige' },
+							{ name: 'Mist<br />Pink', colorChip: 'color_03mg_pink.png', colorCode: 'mg_pink' },
+							{ name: 'Mist<br />Mint', colorChip: 'color_03mg_mint.png', colorCode: 'mg_mint' },
 							{ name: 'Mist<br />Silver', colorChip: 'color_03mg_silver.png', colorCode: 'mg_sliver' },
 						],
 					},

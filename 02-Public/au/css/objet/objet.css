@@ -647,12 +647,12 @@
 
 
 /* 220525 start 재질/컬러 순서변경 */
-.select_objet_list .type01 { padding:0; order:1; } 
+.select_objet_list .type01 { padding:0; /* order:1; */ } 
 .select_objet_list .type01 .objet-bx .scroll-content { padding:10px; white-space: nowrap; display: flex; } 
 .select_objet .select_objet_list { display: flex; overflow-x: scroll; overflow-y: hidden; } 
 .select_objet .select_objet_list:after { display: block; content: ""; clear: both; } 
-.select_objet .select_objet_list > p { order:2; } 
-.select_objet .collection_wrap { width: auto !important; display:inline-block; padding:0; padding:10px 20px 0 0; } 
+/* .select_objet .select_objet_list > p { order:2; }  */
+.select_objet .collection_wrap { width: auto !important; display:inline-block; padding:0; padding:10px 20px 0 30px; } 
 .select_objet .collection_wrap .main_tooltip { padding:0; font-size: 15px; text-align: left; } 
 .select_objet .collection_wrap .main_color_wrap { width:310px !important; margin:5px 10px 20px 0; border-radius: 10px; padding:8px; } 
 .select_objet .collection_wrap .main_color_wrap .txt_wrap span.price_num { padding:0; } 
